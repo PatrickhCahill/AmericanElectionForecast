@@ -95,14 +95,5 @@ The map shows the probability of each of the states voting for Kamala Harris or 
 | **Chance Harris Wins the Popular Vote**   | 74%     |
 ---
 
-### 📌 Takeaways:
 
-- **Moderate Growth Ahead:** The GDP is expected to continue expanding, albeit at a slower pace.
-- **Labor Market Stability:** Unemployment remains low, indicating strong job availability and potential wage growth pressure.
-- **Inflation Concerns:** While inflation is cooling, it remains above target levels, impacting consumer sentiment.
-
-For further analysis, visit [Economic Insights](https://example.com).
-
----
-
-*Prepared by: The American Forecasting Group | August 2024*
+*Prepared by: Patrick Cahill | August 2024*
