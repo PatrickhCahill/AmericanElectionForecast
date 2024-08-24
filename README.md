@@ -7,3 +7,5 @@ A simple electoral forecaster. A brief methedological overview:
 4. We then shift the states to ensure that the national voteshare matches the 538 polling average. We increase the variances to reflect this reliance on the polls assuming the polls are drawn from a distribution with variance 0.08.
 5. We then have means for each of the candidates and associated variances which enables us to calculate probabilities and voteshare.
 6. Finally, we run a brief simulation to draw a histogram.
+
+Feel free to use this code however you like. I sourced the data [MIT Election Data and Science Lab](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PEJ5QU). Plots were made using [plotly.py](https://plotly.com/python/)
