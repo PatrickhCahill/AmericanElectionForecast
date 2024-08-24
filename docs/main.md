@@ -57,7 +57,7 @@ Our model uses historical trends as well as making use of [538's polling average
 ### 1. **The Map**
 The map shows the probability of each of the states voting for Kamala Harris or Donald Trump. We also forecast the vote share for each candidate in each state.
 <div class="container" style="margin-top:-1.8em;">
-    <iframe src="chloropleth.html" title="Election Polls" style="height:600px"></iframe>
+    <iframe src="../chloropleth.html" title="Election Polls" style="height:600px"></iframe>
 </div>
     <div class="chloro_text_container">
         <div class="left">
@@ -80,7 +80,7 @@ The map shows the probability of each of the states voting for Kamala Harris or 
 ### 2. **The Uncertainty** (2014 - 2024)
 
 <div class="histo_container">
-    <iframe src="histogram.html" title="Election Analysis" style="height:400px"></iframe>
+    <iframe src="../histogram.html" title="Election Analysis" style="height:400px"></iframe>
 </div>
 
 ---
