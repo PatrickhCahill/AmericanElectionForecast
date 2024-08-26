@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>&#x1f4ca; American Election Forecaster - August 2024</title>
+  <style>
+    /* From extension vscode.github */
+    /*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+    .vscode-dark img[src$=\#gh-light-mode-only],
+    .vscode-light img[src$=\#gh-dark-mode-only],
+    .vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+    .vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+      display: none;
+    }
+  </style>
+
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  </style>
+  <style>
+    .task-list-item {
+      list-style-type: none;
+    }
+
+    .task-list-item-checkbox {
+      margin-left: -20px;
+      vertical-align: middle;
+      pointer-events: none;
+    }
+  </style>
+  <style>
+    :root {
+      --color-note: #0969da;
+      --color-tip: #1a7f37;
+      --color-warning: #9a6700;
+      --color-severe: #bc4c00;
+      --color-caution: #d1242f;
+      --color-important: #8250df;
+    }
+  </style>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-note: #2f81f7;
+        --color-tip: #3fb950;
+        --color-warning: #d29922;
+        --color-severe: #db6d28;
+        --color-caution: #f85149;
+        --color-important: #a371f7;
+      }
+    }
+  </style>
+  <style>
+    .markdown-alert {
+      padding: 0.5rem 1rem;
+      margin-bottom: 16px;
+      color: inherit;
+      border-left: .25em solid #888;
+    }
+
+    .markdown-alert>:first-child {
+      margin-top: 0
+    }
+
+    .markdown-alert>:last-child {
+      margin-bottom: 0
+    }
+
+    .markdown-alert .markdown-alert-title {
+      display: flex;
+      font-weight: 500;
+      align-items: center;
+      line-height: 1
+    }
+
+    .markdown-alert .markdown-alert-title .octicon {
+      margin-right: 0.5rem;
+      display: inline-block;
+      overflow: visible !important;
+      vertical-align: text-bottom;
+      fill: currentColor;
+    }
+
+    .markdown-alert.markdown-alert-note {
+      border-left-color: var(--color-note);
+    }
+
+    .markdown-alert.markdown-alert-note .markdown-alert-title {
+      color: var(--color-note);
+    }
+
+    .markdown-alert.markdown-alert-important {
+      border-left-color: var(--color-important);
+    }
+
+    .markdown-alert.markdown-alert-important .markdown-alert-title {
+      color: var(--color-important);
+    }
+
+    .markdown-alert.markdown-alert-warning {
+      border-left-color: var(--color-warning);
+    }
+
+    .markdown-alert.markdown-alert-warning .markdown-alert-title {
+      color: var(--color-warning);
+    }
+
+    .markdown-alert.markdown-alert-tip {
+      border-left-color: var(--color-tip);
+    }
+
+    .markdown-alert.markdown-alert-tip .markdown-alert-title {
+      color: var(--color-tip);
+    }
+
+    .markdown-alert.markdown-alert-caution {
+      border-left-color: var(--color-caution);
+    }
+
+    .markdown-alert.markdown-alert-caution .markdown-alert-title {
+      color: var(--color-caution);
+    }
+  </style>
+
+</head>
+
+<body class="vscode-body vscode-light">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Forecaster</title>
+    <style>
+      html {
+        max-width: 1300px;
+        display: table;
+        margin: auto;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .chloro_container {
+        display: flex;
+        justify-content: space-around;
+        width: 85%;
+      }
+
+      .chloro_text_container {
+        display: flex;
+        justify-content: space-between;
+        font-family: Arial, sans-serif;
+        font-size: 2em;
+        margin-top: -2.5em;
+      }
+
+      .left,
+      .right {
+        display: flex;
+        align-items: center;
+      }
+
+      .histo_container {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+      }
+
+      .name {
+        margin-right: 5px;
+      }
+
+      iframe {
+        width: 100%;
+        border: none;
+      }
+
+      .harris {
+        color: #116dc2;
+      }
+
+      .trump {
+        color: #cf1313;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <h1 id="-american-election-forecaster---august-2024">📊 American Election Forecaster - August 2024</h1>
+    <div class="container" style="text-align: center;">
+      <!-- <h2><span style="color: #116dc2; text-decoration: underline; ">Kamala Harris</span> is <i><b>very</b> slightly
+          favoured</i> to win. If the election were held today she would have a <i>53.4%</i> chance to win the election.
+        <br> We expect her to win 276 Electoral College votes.
+      </h2> -->
+    </div>
+    <h2 id="overview">Overview</h2>
+    <p>Our model uses historical trends as well as making use of <a
+        href="https://projects.fivethirtyeight.com/polls/president-general/2024/national/?ex_cid=abcpromo">538's polling
+        averages</a>. We try to guess how the states will move relative to one another and then we simulate 10,000
+      results to calculate the probability of different candidates winning.</p>
+    <hr>
+    <h3 id="1-the-map">1. <strong>The Map</strong></h3>
+    <p>The map shows the probability of each of the states voting for Kamala Harris or Donald Trump. We also forecast
+      the vote share for each candidate in each state.</p>
+    <div class="container" style="margin-top:-1.8em;">
+      <iframe src="./chloropleth.html" title="Election Polls" style="height:600px"></iframe>
+    </div>
+    <!-- <div class="chloro_text_container">
+      <div class="left">
+        <i><b><span class="name harris">Harris</span>
+            <span class="number"> wins 53 out of 100 </i></b> </span>
+      </div>
+      <div class="right">
+        <i><b><span class="name trump">Trump</span>
+            <span class="number"> wins 47 out of 100 </i></b> </span>
+      </div>
+    </div> -->
+    <!-- <p><strong>Key insights:</strong></p>
+    <ul>
+      <li><u>It is an extremely close election.</u></li>
+      <li>Pennsylvania is the <u>key tipping point state</u>. <em>26%</em> of the time it's votes are the final votes to
+        deliver the victor.</li>
+    </ul> -->
+    <hr>
+    <h3 id="2-the-uncertainty-2014---2024">2. <strong>The Uncertainty</strong> (2014 - 2024)</h3>
+    <div class="histo_container">
+      <iframe src="./histogram.html" title="Election Analysis" style="height:400px"></iframe>
+    </div>
+    <hr>
+    <h2 id="the-summary"><strong>The Summary</strong></h2>
+    <!-- <div style="display: table;margin: auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Indicator</th>
+            <th style="text-align:center">(%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Kamala Harris Popular Vote</strong></td>
+            <td style="text-align:center">49.6 %</td>
+          </tr>
+          <tr>
+            <td><strong>Donald Trump Popular Vote</strong></td>
+            <td style="text-align:center">45.7%</td>
+          </tr>
+          <tr>
+            <td><strong>Other Popular Vote</strong></td>
+            <td style="text-align:center">6.1%</td>
+          </tr>
+          <tr>
+            <td><strong>Chance Harris Wins the Popular Vote</strong></td>
+            <td style="text-align:center">74%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+    <div class="container" style="margin-top:-1.8em;">
+        <iframe src="./ev_vote.html" title="Electoral college vs vote" style="height:600px"></iframe>
+      </div>
+    <hr>
+    <p><em>Prepared by: Patrick Cahill | August 2024</em></p>
+
+
+
+  </body>
+
+</html>
