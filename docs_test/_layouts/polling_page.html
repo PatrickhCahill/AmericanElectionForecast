@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include head.html %}
+    <style>
+        body{
+            background-color: blanchedalmond;
+        }
+    </style>
+  <body id="page-top">
+    {% include nav.html %}
+
+    {% if page.title %}
+        {% assign html_file = "assets/poll_plots/" | append: page.title | append: ".html" %}
+        {% assign static_file_paths = site.static_files | map: "path" %}
+
+        {% if static_file_paths contains html_file %}
+            <iframe src="/{{ html_file }}" width="100%" height="500px"></iframe>
+        {% else %}
+            <p>No corresponding HTML file found in the assets folder.</p>
+        {% endif %}
+    {% else %}
+        <p>Page title is not defined.</p>
+    {% endif %}
+  
+    {{ content }}
+
+
+    {% include call-to-action.html %}
+    {% include services.html %}
+    {% include portfolio.html %}
+    {% include aside.html %}
+    {% include contact.html %}
+    {% include scripts.html %}
+  </body>
+</html>

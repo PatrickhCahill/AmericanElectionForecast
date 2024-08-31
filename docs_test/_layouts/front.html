@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-{% include head.html %}
+  {% include head.html %}
 
 <body id="page-top">
   {% include nav.html %}
@@ -24,6 +23,9 @@
     </div>
 
   {% endif %}
+
+  {{ content }}
+
   {% include call-to-action.html %}
   {% include services.html %}
   {% include portfolio.html %}

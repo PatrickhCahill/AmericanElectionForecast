@@ -10,3 +10,10 @@ github_username:
 
 # Build settings
 markdown: kramdown
+
+include: 
+  - _polls
+collections:
+  polls:
+    output: true
+    permalink: /:collection/:path/
