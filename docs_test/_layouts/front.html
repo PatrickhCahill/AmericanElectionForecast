@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include head.html %}
+
+<body id="page-top">
+  {% include nav.html %}
+  {% include header.html %}
+  {% if page.title=="Home"%}
+    <div style="width:85em; margin-top:-1.8em;">
+      <iframe src="./chloropleth2.html" title="Election Polls" style="width:85em; height:600px"></iframe>
+    </div>
+    <div style="width:80%">
+      <div class="chloro_text_container">
+        <div class="left">
+          <i><b><span class="name harris">Harris</span>
+              <span class="number"> wins {{ site.data.facts.harris_prob }} out of 100 </i></b> </span>
+        </div>
+        <div class="right">
+          <i><b><span class="name trump">Trump</span>
+              <span class="number"> wins {{ site.data.facts.trump_prob }} out of 100 </i></b> </span>
+        </div>
+      </div>
+    </div>
+
+  {% endif %}
+  {% include call-to-action.html %}
+  {% include services.html %}
+  {% include portfolio.html %}
+  {% include aside.html %}
+  {% include contact.html %}
+  {% include scripts.html %}
+</body>
+
+</html>
