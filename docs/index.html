@@ -1,286 +1,124 @@
-<!DOCTYPE html>
-<html>
+---
+layout: home_page
+title: "index"
+---
+<style>
+    .btn-selected {background-color: grey;}
+</style>
 
-<head>
-  <meta charset="UTF-8">
-  <title>&#x1f4ca; American Election Forecaster - August 2024</title>
-  <style>
-    /* From extension vscode.github */
-    /*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-    .vscode-dark img[src$=\#gh-light-mode-only],
-    .vscode-light img[src$=\#gh-dark-mode-only],
-    .vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
-    .vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
-      display: none;
-    }
-  </style>
-
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-  </style>
-  <style>
-    .task-list-item {
-      list-style-type: none;
-    }
-
-    .task-list-item-checkbox {
-      margin-left: -20px;
-      vertical-align: middle;
-      pointer-events: none;
-    }
-  </style>
-  <style>
-    :root {
-      --color-note: #0969da;
-      --color-tip: #1a7f37;
-      --color-warning: #9a6700;
-      --color-severe: #bc4c00;
-      --color-caution: #d1242f;
-      --color-important: #8250df;
-    }
-  </style>
-  <style>
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --color-note: #2f81f7;
-        --color-tip: #3fb950;
-        --color-warning: #d29922;
-        --color-severe: #db6d28;
-        --color-caution: #f85149;
-        --color-important: #a371f7;
-      }
-    }
-  </style>
-  <style>
-    .markdown-alert {
-      padding: 0.5rem 1rem;
-      margin-bottom: 16px;
-      color: inherit;
-      border-left: .25em solid #888;
-    }
-
-    .markdown-alert>:first-child {
-      margin-top: 0
-    }
-
-    .markdown-alert>:last-child {
-      margin-bottom: 0
-    }
-
-    .markdown-alert .markdown-alert-title {
-      display: flex;
-      font-weight: 500;
-      align-items: center;
-      line-height: 1
-    }
-
-    .markdown-alert .markdown-alert-title .octicon {
-      margin-right: 0.5rem;
-      display: inline-block;
-      overflow: visible !important;
-      vertical-align: text-bottom;
-      fill: currentColor;
-    }
-
-    .markdown-alert.markdown-alert-note {
-      border-left-color: var(--color-note);
-    }
-
-    .markdown-alert.markdown-alert-note .markdown-alert-title {
-      color: var(--color-note);
-    }
-
-    .markdown-alert.markdown-alert-important {
-      border-left-color: var(--color-important);
-    }
-
-    .markdown-alert.markdown-alert-important .markdown-alert-title {
-      color: var(--color-important);
-    }
-
-    .markdown-alert.markdown-alert-warning {
-      border-left-color: var(--color-warning);
-    }
-
-    .markdown-alert.markdown-alert-warning .markdown-alert-title {
-      color: var(--color-warning);
-    }
-
-    .markdown-alert.markdown-alert-tip {
-      border-left-color: var(--color-tip);
-    }
-
-    .markdown-alert.markdown-alert-tip .markdown-alert-title {
-      color: var(--color-tip);
-    }
-
-    .markdown-alert.markdown-alert-caution {
-      border-left-color: var(--color-caution);
-    }
-
-    .markdown-alert.markdown-alert-caution .markdown-alert-title {
-      color: var(--color-caution);
-    }
-  </style>
-
-</head>
-
-<body class="vscode-body vscode-light">
-
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Election Forecaster</title>
-    <style>
-      html {
-        max-width: 1300px;
-        display: table;
-        margin: auto;
-      }
-
-      body {
-        font-family: Arial, sans-serif;
-      }
-
-      .chloro_container {
-        display: flex;
-        justify-content: space-around;
-        width: 85%;
-      }
-
-      .chloro_text_container {
-        display: flex;
-        justify-content: space-between;
-        font-family: Arial, sans-serif;
-        font-size: 2em;
-        margin-top: -2.5em;
-      }
-
-      .left,
-      .right {
-        display: flex;
-        align-items: center;
-      }
-
-      .histo_container {
-        display: flex;
-        justify-content: space-around;
-        width: 100%;
-      }
-
-      .name {
-        margin-right: 5px;
-      }
-
-      iframe {
-        width: 100%;
-        border: none;
-      }
-
-      .harris {
-        color: #116dc2;
-      }
-
-      .trump {
-        color: #cf1313;
-      }
-    </style>
-  </head>
-
-  <body>
-
-    <h1 id="-american-election-forecaster---august-2024">📊 American Election Forecaster - August 2024</h1>
-    <div class="container" style="text-align: center;">
-      <!-- <h2><span style="color: #116dc2; text-decoration: underline; ">Kamala Harris</span> is <i><b>very</b> slightly
-          favoured</i> to win. If the election were held today she would have a <i>53.4%</i> chance to win the election.
-        <br> We expect her to win 276 Electoral College votes.
-      </h2> -->
-    </div>
-    <h2 id="overview">Overview</h2>
-    <p>Our model uses historical trends as well as making use of <a
-        href="https://projects.fivethirtyeight.com/polls/president-general/2024/national/?ex_cid=abcpromo">538's polling
-        averages</a>. We try to guess how the states will move relative to one another and then we simulate 10,000
-      results to calculate the probability of different candidates winning.</p>
-    <hr>
-    <h3 id="1-the-map">1. <strong>The Map</strong></h3>
-    <p>The map shows the probability of each of the states voting for Kamala Harris or Donald Trump. We also forecast
-      the vote share for each candidate in each state.</p>
-    <div style="margin-top:-1.8em;">
-      <iframe src="./chloropleth.html" title="Election Polls" style="height:600px"></iframe>
-    </div>
-    <!-- <div class="chloro_text_container">
-      <div class="left">
-        <i><b><span class="name harris">Harris</span>
-            <span class="number"> wins 53 out of 100 </i></b> </span>
-      </div>
-      <div class="right">
-        <i><b><span class="name trump">Trump</span>
-            <span class="number"> wins 47 out of 100 </i></b> </span>
-      </div>
+<section style="width:65%; margin:0 auto;">
+    <div style="height: 40em;">
+        <div class="text-center h4 strong">How the race breaks down in each state</div>
+        <p class="text-center small"> Hover over each for the probability that Trump or Harris will win it. Each state
+            will deliver one of the candidates their electoral votes. The one who receives 270 wins the election.</p>
+        <iframe src="/assets/chloropleth.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
+        <!-- <div style="width:inherit; margin: 0 auto;">
+        <div class="chloro_text_container">
+            <div class="left">
+                <i><b><span class="name harris">Harris</span>
+                        <span class="number"> wins {{ site.data.facts.harris_prob }} out of 100 </i></b> </span>
+            </div>
+            <div class="right">
+                <i><b><span class="name trump">Trump</span>
+                        <span class="number"> wins {{ site.data.facts.trump_prob }} out of 100 </i></b> </span>
+            </div>
+        </div>
     </div> -->
-    <!-- <p><strong>Key insights:</strong></p>
-    <ul>
-      <li><u>It is an extremely close election.</u></li>
-      <li>Pennsylvania is the <u>key tipping point state</u>. <em>26%</em> of the time it's votes are the final votes to
-        deliver the victor.</li>
-    </ul> -->
-    <hr>
-    <h3>2. <strong>The Uncertainty</strong> (2014 - 2024)</h3>
-    <div class="histo_container">
-      <iframe src="./histogram.html" title="Election Analysis" style=" width: 90%; height: 30em "></iframe>
+
     </div>
-    <hr>
-    <!-- <h2 id="the-summary"><strong>The Summary</strong></h2> -->
-    <!-- <div style="display: table;margin: auto;">
-      <table>
+
+    <table style="width: 60%; margin: 0 auto;">
         <thead>
-          <tr>
-            <th>Indicator</th>
-            <th style="text-align:center">(%)</th>
-          </tr>
+            <tr >
+                <th class="bottom-border">Electoral college</th>
+                <th class="bottom-border">Popular vote</th>
+            </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><strong>Kamala Harris Popular Vote</strong></td>
-            <td style="text-align:center">49.6 %</td>
-          </tr>
-          <tr>
-            <td><strong>Donald Trump Popular Vote</strong></td>
-            <td style="text-align:center">45.7%</td>
-          </tr>
-          <tr>
-            <td><strong>Other Popular Vote</strong></td>
-            <td style="text-align:center">6.1%</td>
-          </tr>
-          <tr>
-            <td><strong>Chance Harris Wins the Popular Vote</strong></td>
-            <td style="text-align:center">74%</td>
-          </tr>
+            <tr>
+                <td class="bottom-border">
+                    <span class="color-cell" style="background-color: red;"></span> Donald Trump <span
+                        class="value">{{ site.data.facts_other[0].trump_mean_ev | round }}</span>
+                </td>
+                <td class="bottom-border">
+                    <span class="color-cell" style="background-color: red;"></span> Donald Trump <span
+                        class="value">{{ site.data.facts_other[0].trump_mean_popular_vote |times: 100 | round: 1}}%</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="bottom-border">
+                    <span class="color-cell" style="background-color: blue;"></span> Kamala Harris <span
+                        class="value">{{ site.data.facts_other[0].harris_mean_ev | round }}</span>
+                </td>
+                <td class="bottom-border">
+                    <span class="color-cell" style="background-color: blue;"></span> Kamala Harris <span
+                        class="value">{{ site.data.facts_other[0].harris_mean_popular_vote |times: 100 | round: 1}}%</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="color-cell" style="background-color: grey;"></span>Other <span class="value">0</span>
+                </td>
+                <td>
+                    <span class="color-cell" style="background-color: grey;"></span>Other <span class="value">{{ site.data.facts_other[0].other_mean_popular_vote |times: 100 | round: 1}}%</span>
+                </td>
+            </tr>
         </tbody>
-      </table>
-    </div> -->
-    <!-- <hr> -->
-    <div class="histo_container" style="padding-left: 0em;" >
-      <iframe src="./ev_vote2.html" style=" width: 90%; height: 40em " title="Election Analysis"></iframe>
+    </table>
+</section>
+
+
+{% include call-to-action.html %}
+
+
+<section style="width:65%; margin:0 auto;">
+    <div style="height: 40em;" class="text-center">
+        <div class="btn-group-1" style="margin: 0 auto;">
+            <button id="win_ev_pv_1" class="btn btn-selected">Chance of winning</button>
+            <button id="win_ev_pv_2" class="btn">Electoral Votes</button>
+            <button id="win_ev_pv_3" class="btn">Popular Vote</button>
+        </div>
+        <iframe id="win_ev_pv" src="/assets/win_probs.html"  title="Election Polls" style="width:80%; height:80%;"></iframe>
+
     </div>
 
-    <hr>
-    <p><em>Prepared by: Patrick Cahill | August 2024</em></p>
+</section>
 
+<section style="width:65%; margin:0 auto;">
+    <div style="height: 40em;" class="text-center">
+        <div class="btn-group-2" style="margin: 0 auto;">
+            <button id="ev_gap_1" class="btn btn-selected">Popular Vote Chances</button>
+            <button id="ev_gap_2" class="btn">Electoral College Gap</button>
+            <button id="ev_gap_3" class="btn">Mismatch chances</button>
+        </div>
+        <iframe id="ev_gap" src="/assets/popular_probs.html"  title="Election Polls" style="width:80%; height:80%;"></iframe>
 
+    </div>
 
-  </body>
+</section>
 
-</html>
+<section class="bg-primary" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">Getting into the nitty-gritty!</h2>
+                <hr class="light">
+                <p class="text-faded">The uncertainty in our forecast will decrease as we get to election day, all else being equal. If the polls get closer the election result will become less clear, if the margin for one candidate or another grows - the chance they win will increase. You can explore all the possibilities by looking at the histogram below.</p>
+                <!-- <a href="/how-it-works.html" class="btn btn-default btn-xl">Learn more!</a> -->
+            </div>
+        </div>
+    </div>
+</section>
+<section style="width:65%; margin:0 auto;">
+    <div style="height: 40em;">
+        <div class="text-center h4 strong">95% of our simulations have Harris winning between {{ site.data.facts_other[0].harris_mean_ev_lower | round }} and {{ site.data.facts_other[0].harris_mean_ev_upper | round }} </div>
+        <p class="text-center small"> Hover over each electoral vote margin to find the probability of that result.</p>
+        <iframe src="/assets/histogram.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
+    </div>
+    <div style="height: 40em;">
+        <div class="text-center h4 strong">What matters is the electoral college, but polls measure that national (or state) vote </div>
+        <p class="text-center small">It's possible to win the popular vote but lose the electoral vote. This plot shows a collection of 1000 simulations. The greyed out values show were one candidate won the electoral college but the other won the popular vote. The <a href="#ev_gap">chance of this</a> outcome occuring has grown since Kamala Harris entered the race.</p>
+        <iframe src="/assets/ev_vote.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
+    </div>
+
+</section>

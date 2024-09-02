@@ -1,0 +1,33 @@
+table {
+    width: 100%;
+    border-collapse: separate;
+    border: none;
+    border-spacing: 30px 5px;
+
+}
+
+td {
+    padding: 0px;
+    vertical-align: top;
+    position: relative;
+    border: none;
+
+}
+
+.bottom-border {
+    border-bottom: 1px solid #eee;
+}
+
+.color-cell {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    /* Make it a circle */
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.value {
+    text-align: right;
+    float: right;
+}
