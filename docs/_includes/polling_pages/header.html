@@ -1,3 +1,15 @@
+<style>
+    .header_date{
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        color: #fff;
+        background-color: rgba(0,0,0,0.2);
+        padding: 5px 10px;
+        border-radius: 2px;
+    }
+</style>
+
 <header>
     <div class="header-content">
         <div class="header-content-inner">
@@ -13,4 +25,6 @@
             <!-- <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a> -->
         </div>
     </div>
+    <div class="header_date">Last updated: {{ site.data.facts_other[0].date }}</div>
+
 </header>
