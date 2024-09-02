@@ -2,6 +2,150 @@
 layout: front
 title: "How It Works."
 header_override: "How It Works."
+header_inner_override: ""
 ---
+<style>
+    .gradient-border-div-first {
+        padding: 20px; /* Adjust padding as needed */
+        border: 5px solid transparent; /* Set the border width */
+        border-image: linear-gradient(45deg, #F05F40, #222) 1;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add shadow */
+        background-color: rgba(0, 0, 0, 0.08);
+    }
+</style>
+<style>
+    .gradient-border-div-second {
+        padding: 20px; /* Adjust padding as needed */
+        border: 5px solid transparent; /* Set the border width */
+        border-image: linear-gradient(-45deg, #F05F40, #222) 1;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add shadow */
+        background-color: rgba(0, 0, 0, 0.08);
+    }
+</style>
+<br>
 
+<section class="gradient-border-div-first" style="width:50%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
+    <div style="width: 80%; margin: 0 auto;">
+        <div class="text-center h3 strong">First - an analogy</div>
+        <p class="text-left"> Suppose you are blindfolded and holding a bow and arrow. A pretty bad idea - I know. You shoot the arrow at a target. You hear the arrow thud into the target so you know you landed somewhere. But beyond that you know nothing. Fortunately, you have two friends: Alice and Bob. Alice tells you that you hit 8cm above the bullseye. Bob tells you that you hit 5cm above the bullseye.</p>
+        <p class="text-left">Where did the bullet land?</p>
+        <div style="margin: 0 auto; max-width: 450px;" ><img src={{"/assets/target_alice_bob.svg" | relative_url}} alt="Alice and Bob's measurements on the target" width="100%"                                                                                                    ></div>
+        <p class="text-left"> Maybe your first instinct is to pick the point in the middle. This amounts to giving both Alice and Bob's measurements <b>equal weight.</b></p>
+        <p class="text-left">But maybe you know Bob is an experienced shooter. Or maybe Alice brought a tape measure and Bob didn't. Either way the point is that not all <b>measurements are create equal</b>. For every measurement, we need to know the <span style="text-decoration: underline;">uncertainty</span> in the measurement.</p>
+        <p class="text-left">Building an election forecast model is pretty analogous to this situation. The forecaster is blind to the event. We can't see the future. We only have a limited amount of data availabe to us and the data are unreliable and full of uncertainty.</p>
 
+    </div>
+</section>
+
+<br>
+
+<section class="gradient-border-div-second" style="width:50%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
+    <div style="width: 80%; margin: 0 auto;">
+        <div class="text-center h3 strong">Second - our measurements</div>
+        <p class="text-left">This is a relatively simple model. We only use two sources of data. <span style="text-decoration: underline;"><b>Historical elections</b></span> and <span style="text-decoration: underline;"><b>polling</b></span>.</p>
+        <p class="text-left">Polling comes in two main forms. State polling and national polling. State polls are the best thing because they measure the voteshare in each state. But they're less common than national polls which measure the voteshare across the country.</p>
+        <p class="text-left"> We want to be able to make use of the national polls, but the presidential election is a contest in 50 different states. To marry the two things we try to establish the partisan lean in each state using historical election data.</p>
+    </div>
+</section>
+
+<br>
+
+<section class="bg-primary" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">A message for the statisticians</h2>
+                <hr class="light">
+                <p class="text-faded">Why don't we use pollster ratings or force a mean 0 bias for each pollster by using a house effect? The answer is simple. We are dealing with really small sample sizes, both in terms of the number of polls (per pollster) and in terms of the number of elections. It might be true that past polling performance is an indicator of future performance, but it's up for debate. Our design philosophy is to keep things as simple as possible. If a simple model spits out reasonable results than it's preferable to a complex model that spits out reasonable results.</p>
+                <p class="text-faded">The same motivation lies behind why we don't include economic fundamentals. Those approaches are valid, but they require careful reasoning and a causal model of how different factors influence an individual voter. For example, you shouldn't just use a regression on the unemployment data and incumbent party performance without reasoning through the causal chain. Once you do, you quickly realise that to properly include unemployment data, one needs to conduct polling of their own to parameterise how unemployment changes effect different categories of voters.</p>
+                
+                <p>That's a difficult task. Better to keep it simple, stupid.</p>
+                <!-- <a href={{"/polling.html" | relative_url}} class="btn btn-default btn-xl">Polling.</a> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<br>
+
+<section class="gradient-border-div-first" style="width:50%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
+    <div style="width: 80%; margin: 0 auto;">
+        <div class="text-center h3 strong">Third - partisan lean</div>
+        <p class="text-left">Take Arizona: In every election has voted d% for the Democrat r% for the Republican and i% for everybody else. That compares to the national vote in each election which is D%, R% and I% respectively.</p>
+        <p> So in every election we look at the difference between those values. d - D, r - R and i-I. You can think of these values as measuring is Arizona more or less Democratic than the rest of the country. Or more or less Republican. Or do they have a higher than expected third party vote.</p>
+
+        <div style="margin: 0 auto; height:40vh" ><iframe src={{"/assets/AZ_evolve_scatter.html" | relative_url}} height="100%"></iframe></div>
+        <p class="text-left"> We can observe that in Arizona, the state is becoming less Republican overtime (compare to the National vote), the other vote is roughly the same as the national vote, and it is becoming much more democratic.
+        <p class="text-left">To estimate the result at 2024 we perform a linear regression (with the weights to each point given by the number of years from the 2024 election squared). That's probably a bunch of mumbo jumbo. Basically we draw a line through the data to explain the trends we observed.</p>
+        <div style="margin: 0 auto; height:40vh" >
+            <iframe src={{"/assets/AZ_evolve.html" | relative_url}} height="85%"></iframe>
+            <div class="">
+                <p class="text-center"> Estimate and 95% Confidence Interval <img src={{"/assets/ci_key.svg" | relative_url}} alt="Description" style="height: 15%; vertical-align: middle;"></p>
+            </div>
+        </div>
+        <p class="text-left">The error bars are calculated from the difference between our regression line to all the previous elections. This is visually useful for human beings but the number we actually care about is the <b>variance</b> in our prediction.</p>
+        <p class="text-left">So in Arizona we forecast that Harris's voteshare will be 2.6% less than her National voteshare, and the variance on that prediction is 0.001. That 0.001 means something to mathematicians, but to everybody else that basically means we expect to be about 1% off in either direction.</p>
+        <p class="text-left"> Now this is useful because if we know the average of <a href={{"/polls/National/" | relative_url}}>the national vote polling</a> is 47.1% for Kamala Harris then our best guess in Arizona would be that Harris receives 44.5%.</p>
+    </div>
+</section>
+
+<br>
+
+<section class="bg-dark" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">Check out the polling averages</h2>
+                <hr class="light">
+                <p class="text-faded">We maintain our own polling averages. <a href="https://fivethirtyeight.com/">fivethirtyeight</a> collate and publish all the polls and we use their raw data to make our averages. So we don't make use of their pollster ratings. Not including pollster ratings can lead to some subtle differences.</p>
+                <a href={{"/polling.html" | relative_url}} class="btn btn-default btn-xl">Polling.</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<br>
+
+<section class="gradient-border-div-second" style="width:50%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
+    <div style="width: 80%; margin: 0 auto;">
+        <div class="text-center h3 strong">Fourth - polling</div>
+        <div class="alert alert-danger text-center" role="alert">IF YOU'RE NOT WONKED OUT ALREADY - GET READY!</div>
+        <p class="text-left">For the National vote and every state where we have polls - we want to find the best average of the polls. We do this by treating each poll at time t as a noisy estimate of an underlying process at time t.</p>
+        <p class="text-left">Following along so far?</p>
+        <p class="text-left">We assign an initial variance in each poll given by the variance of a Bernoulli distribution n p (1-p) where n is the sample size and p is the frequency. Then we also assume that the underlying process behaves like a random walk with daily variance 0.005**2. Or in other words it moves half a percent each day. This means we add an additional variance to each poll given by the number of days squared multiplied by the 0.005**2. So now every poll has a value and a variance associated with it.</p>
+
+        <p class="text-left">We can now combine them by averaging them with weights given by inverse of the variance. The result variance in our prediction is the harmonic mean of all the poll variances.</p>
+
+        <p class="text-left">Now that's everything that we do for the <a href={{"/polling.html" | relative_url}}>polling averages</a> that we publish. For the model we add an addition variance term that represents the expected bias, which is given by 0.03**2.</p>
+
+        <p class="text"> With this done we now have a national average and national variance, as well as state average and state variance for every state with polls.</p>
+    </div>
+</section>
+
+<br>
+
+<section class="gradient-border-div-second" style="width:50%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
+    <div style="width: 80%; margin: 0 auto;">
+        <div class="text-center h3 strong">Fifth - combining it all together</div>
+        <p class="text-left">From the above we create two predictions in every state. The first is partisan lean + national polling average. The second is the state polling average. We have this prediction for each candidate and we also have our variances. We combine these two measurements as before to get a final estiamte and a final variance.</p>
+
+        <p class="text-left">But that's not quite enough...</p>
+
+        <p class="text-left"> We now have means and variances for each candidate in each state. To account for the facts that swings tend to be correlated, we build a covariance matrix. We do this by taking the correlation matrix from the past elections and using the estimating variances to calculate the covariance. We decrease the covariances by a factor of a half to account for uncertainty in the correlations. With this we have three multivariate distributions. One for Harris, one for Trump and one for the other vote. We then draw 10,000 random vectors from these multivariate distributions - which constitutes simulating 10,000 elections. Normal distributions not needing to sum to one, is fixed by clamping the values and dividing by the sum of the candidates. We then calculate our model results based off these results.</p>
+    </div>
+</section>
+
+<br>
+
+<section class="bg-primary" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">Check out the forecast again</h2>
+                <hr class="light">
+                <p class="text-faded">Now that you've learnt how the model works maybe some of the results will be more interesting. Maybe you can find some bugs in my code or flaws in my method. Let me know, if you do.</p>
+                <a href=<a href={{"/" | relative_url}} class="btn btn-default btn-xl">Forecast.</a>
+            </div>
+        </div>
+    </div>
+</section>

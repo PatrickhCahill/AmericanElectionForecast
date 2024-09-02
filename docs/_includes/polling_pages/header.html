@@ -1,0 +1,16 @@
+<header>
+    <div class="header-content">
+        <div class="header-content-inner">
+            {% if page.header_override %}
+            <h1>{{ page.header_override }}</h1>
+            {% else if page.title %}
+            <h1>{{ page.title }}</h1>
+            {% endif %}
+            <hr>
+            <div class="text-left" style="width: fit-content; margin: 0 20%;">
+                Thank you to the <a href="https://fivethirtyeight.com/">538 team</a> for providing a download link to all their collated polls. It makes this project possible. <br> We source the raw polls from 538, but we use out own method of averaging them, which you can <a href={{"/how-it-works.html" | relative_url}}>read about here</a>.
+            </div> 
+            <!-- <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a> -->
+        </div>
+    </div>
+</header>

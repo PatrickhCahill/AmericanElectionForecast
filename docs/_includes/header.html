@@ -1,3 +1,15 @@
+<style>
+    .header_date{
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        color: #fff;
+        background-color: rgba(0,0,0,0.2);
+        padding: 5px 10px;
+        border-radius: 2px;
+    }
+</style>
+
 <header>
     <div class="header-content">
         <div class="header-content-inner">
@@ -8,12 +20,18 @@
             {% endif %}
             <hr>
             <div class="text-left" style="width: fit-content; margin: 0 20%;">
-                <span class="name">Harris has a {{ site.data.facts_other[0].harris_ev_prob |times: 100 | round: 1}}% chance to win the election.</span>
-                <br>
-                <span class="name">Meanwhile, Trump has a {{ site.data.facts_other[0].trump_ev_prob |times: 100 | round: 1}}% chance to win the
-                    election.</span>
+                {% if page.header_inner_override %}
+                    <span class="name">{{ page.header_inner_override }}</span>
+                {% else if page.title %}
+                    <span class="name">Harris has a {{ site.data.facts_other[0].harris_ev_prob |times: 100 | round: 1}}% chance to win the election.</span>
+                    <br>
+                    <span class="name">Meanwhile, Trump has a {{ site.data.facts_other[0].trump_ev_prob |times: 100 | round: 1}}% chance to win the
+                        election.</span>
+                {% endif %}
             </div> 
             <!-- <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a> -->
         </div>
     </div>
+    <div class="header_date">Last updated: {{ site.data.facts_other[0].date }}</div>
+
 </header>
