@@ -1,19 +1,18 @@
 <!-- jQuery -->
-<script src="{{site.url}}/js/jquery.js"></script>
-
+<script src={{"/js/jquery.js" | relative_url}}></script>
 <!-- Bootstrap Core JavaScript -->
-<script src="{{site.url}}/js/bootstrap.min.js"></script>
+<script src={{"/js/bootstrap.min.js" | relative_url}}></script>
 
 <!-- Plugin JavaScript -->
-<script src="{{site.url}}/js/jquery.easing.min.js"></script>
-<script src="{{site.url}}/js/jquery.fittext.js"></script>
-<script src="{{site.url}}/js/wow.min.js"></script>
+<script src={{"/js/jquery.easing.min.js" | relative_url}}></script>
+<script src={{"/js/jquery.fittext.js" | relative_url}}></script>
+<script src={{"/js/wow.min.js" | relative_url}}></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="{{site.url}}/js/creative.js"></script>
+<script src={{"/js/creative.js" | relative_url}}></script>
 
 
 {% assign js_file = "js/" | append: page.title | append: ".js" %}
 {% if js_file %}
-    <script src="{{site.url}}/{{ js_file }}"></script>
+    <script src={{ js_file | relative_url}}></script>
 {% endif %}

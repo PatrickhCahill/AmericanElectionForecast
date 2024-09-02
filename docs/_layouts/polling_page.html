@@ -12,9 +12,9 @@
     <p class="text-center small"> The polling average of the two main candidates with others grouped together adjusted
       for sample size and time delay.</p>
 
-    <iframe src="{{site.url}}/{{ html_file }}" width="100%" height="420px"></iframe>
+    <iframe src={{ html_file | relative_url}} width="100%" height="420px"></iframe>
     <div class="">
-      <p class="text-center"> Estimate and 95% Confidence Interval <img src="{{site.url}}/assets/ci_key.svg"
+      <p class="text-center"> Estimate and 95% Confidence Interval <img src={{"/assets/ci_key.svg" | relative_url}}
           alt="Description" style="height: 2em; vertical-align: middle;"></p>
     </div>
   </div>
