@@ -221,7 +221,7 @@ header {
     min-height: auto;
     @include background-cover;
     background-position: center;
-    background-image: url('/assets/mm-home-page-feature.svg');
+    background-image: url('../assets/mm-home-page-feature.svg');
     text-align: center;
     color: white;
     .header-content {

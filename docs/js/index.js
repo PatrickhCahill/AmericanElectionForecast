@@ -8,23 +8,23 @@
 //         var src = '';
 //         switch (graph) {
 //             case 'win_ev_pv_1':
-//                 src = '/assets/win_probs.html';
+//                 src = 'assets/win_probs.html';
 //                 break;
 //             case 'win_ev_pv_2':   
-//                 src = '/assets/ev_plot.html';
+//                 src = 'assets/ev_plot.html';
 //                 break;
 //             case 'win_ev_pv_3':
-//                 src = '/assets/popular_votes.html';
+//                 src = 'assets/popular_votes.html';
 //                 break;
             
 //                 case 'ev_gap_1':
-//                 src = '/assets/popular_probs.html';
+//                 src = 'assets/popular_probs.html';
 //                 break;
 //             case 'ev_gap_2':   
-//                 src = '/assets/ec_gap.html';
+//                 src = 'assets/ec_gap.html';
 //                 break;
 //             case 'ev_gap_3':   
-//                 src = '/assets/mismatch_probs.html';
+//                 src = 'assets/mismatch_probs.html';
 //                 break;
 //             }
 
@@ -43,13 +43,13 @@ $(document).ready(function(){
         var src = '';
         switch (graph) {
             case 'win_ev_pv_1':
-                src = '/assets/win_probs.html';
+                src = 'assets/win_probs.html';
                 break;
             case 'win_ev_pv_2':   
-                src = '/assets/ev_plot.html';
+                src = 'assets/ev_plot.html';
                 break;
             case 'win_ev_pv_3':
-                src = '/assets/popular_votes.html';
+                src = 'assets/popular_votes.html';
                 break;
         }
 
@@ -66,13 +66,13 @@ $(document).ready(function(){
         var src = '';
         switch (graph) {
             case 'ev_gap_1':
-                src = '/assets/popular_probs.html';
+                src = 'assets/popular_probs.html';
                 break;
             case 'ev_gap_2':   
-                src = '/assets/ec_gap.html';
+                src = 'assets/ec_gap.html';
                 break;
             case 'ev_gap_3':   
-                src = '/assets/mismatch_probs.html';
+                src = 'assets/mismatch_probs.html';
                 break;
         }
 
