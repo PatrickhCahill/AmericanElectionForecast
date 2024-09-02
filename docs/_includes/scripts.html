@@ -1,20 +1,20 @@
 <!-- jQuery -->
-<script src="/js/jquery.js"></script>
+<script src="js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
 <!-- Plugin JavaScript -->
-<script src="/js/jquery.easing.min.js"></script>
-<script src="/js/jquery.fittext.js"></script>
-<script src="/js/wow.min.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/jquery.fittext.js"></script>
+<script src="js/wow.min.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="/js/creative.js"></script>
+<script src="js/creative.js"></script>
 
 
 {% assign js_file = "js/" | append: page.title | append: ".js" %}
 {% if js_file %}
-    <script src="/{{ js_file }}"></script>
+    <script src="{{ js_file }}"></script>
 {% endif %}
 

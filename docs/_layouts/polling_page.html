@@ -11,8 +11,8 @@
       <div class="text-center h4 strong">{{ page.title }} Polling Results</div>
       <p class="text-center small"> The polling average of the two main candidates with others grouped together adjusted for sample size and time delay.</p>
 
-      <iframe src="/{{ html_file }}" width="100%" height="420px"></iframe>
-      <div class=""><p class="text-center"> Estimate and 95% Confidence Interval <img src="/assets/ci_key.svg" alt="Description" style="height: 2em; vertical-align: middle;"></p></div>
+      <iframe src="{{ html_file }}" width="100%" height="420px"></iframe>
+      <div class=""><p class="text-center"> Estimate and 95% Confidence Interval <img src="assets/ci_key.svg" alt="Description" style="height: 2em; vertical-align: middle;"></p></div>
     </div>
   {% else %}
     <p>Page title is not defined.</p>

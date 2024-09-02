@@ -11,7 +11,7 @@ title: "index"
         <div class="text-center h4 strong">How the race breaks down in each state</div>
         <p class="text-center small"> Hover over each for the probability that Trump or Harris will win it. Each state
             will deliver one of the candidates their electoral votes. The one who receives 270 wins the election.</p>
-        <iframe src="/assets/chloropleth.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
+        <iframe src="assets/chloropleth.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
         <!-- <div style="width:inherit; margin: 0 auto;">
         <div class="chloro_text_container">
             <div class="left">
@@ -78,7 +78,7 @@ title: "index"
             <button id="win_ev_pv_2" class="btn">Electoral Votes</button>
             <button id="win_ev_pv_3" class="btn">Popular Vote</button>
         </div>
-        <iframe id="win_ev_pv" src="/assets/win_probs.html"  title="Election Polls" style="width:80%; height:80%;"></iframe>
+        <iframe id="win_ev_pv" src="assets/win_probs.html"  title="Election Polls" style="width:80%; height:80%;"></iframe>
 
     </div>
 
@@ -91,7 +91,7 @@ title: "index"
             <button id="ev_gap_2" class="btn">Electoral College Gap</button>
             <button id="ev_gap_3" class="btn">Mismatch chances</button>
         </div>
-        <iframe id="ev_gap" src="/assets/popular_probs.html"  title="Election Polls" style="width:80%; height:80%;"></iframe>
+        <iframe id="ev_gap" src="assets/popular_probs.html"  title="Election Polls" style="width:80%; height:80%;"></iframe>
 
     </div>
 
@@ -113,12 +113,12 @@ title: "index"
     <div style="height: 40em;">
         <div class="text-center h4 strong">95% of our simulations have Harris winning between {{ site.data.facts_other[0].harris_mean_ev_lower | round }} and {{ site.data.facts_other[0].harris_mean_ev_upper | round }} </div>
         <p class="text-center small"> Hover over each electoral vote margin to find the probability of that result.</p>
-        <iframe src="/assets/histogram.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
+        <iframe src="assets/histogram.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
     </div>
     <div style="height: 40em;">
         <div class="text-center h4 strong">What matters is the electoral college, but polls measure that national (or state) vote </div>
         <p class="text-center small">It's possible to win the popular vote but lose the electoral vote. This plot shows a collection of 1000 simulations. The greyed out values show were one candidate won the electoral college but the other won the popular vote. The <a href="#ev_gap">chance of this</a> outcome occuring has grown since Kamala Harris entered the race.</p>
-        <iframe src="/assets/ev_vote.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
+        <iframe src="assets/ev_vote.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
     </div>
 
 </section>
