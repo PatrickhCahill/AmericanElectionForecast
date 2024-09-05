@@ -5,8 +5,79 @@ title: "index"
 <style>
     .btn-selected {background-color: grey;}
 </style>
+<style>
+    #hoverbar {
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+        /* font-size: 20em; */
+        display: none;
+        pointer-events: none; /* Prevents hoverbar from interfering with mouse events */
+    }
+</style>
+<div id="hoverbar"></div>
 
-<section style="width:65%; margin:0 auto;">
+<!-- <section style="width:30%; margin:0 auto; height:500px; justify-content: end;">
+    <div style="margin: auto auto; max-width: 450px; height: 100%; width:100%" >
+
+        <object class id="us_cartogram" type="image/svg+xml" data={{"/assets/noinkscape_updated.svg" | relative_url}} height="100%" width="100%"></object>
+    </div>
+</section> -->
+
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Select the SVG element after it has loaded
+        d3.select("#us_cartogram").on("load", function() {
+            // Access the SVG document
+            const svgDoc = d3.select(this).node().contentDocument;
+
+            // Select the element with id 'ca22' and change its color to blue
+            d3.select(svgDoc.getElementById("ca-22"))
+                .style("fill", "blue");
+
+            // Select all paths in the SVG
+            const allPaths = d3.select(svgDoc).selectAll("path");
+
+            // Get the hoverbar element
+            const hoverbar = d3.select("#hoverbar");
+
+            // Apply a hover effect to all paths
+            allPaths.on("mouseover", function (event) {
+                // Make all paths more transparent except the hovered one
+                allPaths.style("opacity", 0.3);
+                d3.select(this).style("opacity", 1);
+
+                // Get the bounding box of the hovered element
+                const bbox = this.getBBox();
+
+                // Update and show the hoverbar with the ID of the hovered element
+                hoverbar
+                    .style("display", "block")
+                    .text(this.id)
+                    .style("left", (bbox.x + bbox.width + 10) + "px") // Place hover bar to the right of the element
+                    .style("top", (bbox.y + (bbox.height) - 10) + "px"); // Vertically center it relative to the element
+            }).on("mouseout", function () {
+                // Reset the opacity of all paths
+                allPaths.style("opacity", 1);
+
+                // Hide the hoverbar
+                hoverbar.style("display", "none");
+            });
+
+
+        
+            });
+    });
+</script> -->
+
+
+<section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
     <div style="height: 40em;">
         <div class="text-center h4 strong">How the race breaks down in each state</div>
         <p class="text-center small"> Hover over each for the probability that Trump or Harris will win it. Each state
@@ -71,7 +142,7 @@ title: "index"
 {% include learn-more.html %}
 
 
-<section style="width:65%; margin:0 auto;">
+<section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
     <div style="height: 40em;" class="text-center">
         <div class="btn-group-1" style="margin: 0 auto;">
             <button id="win_ev_pv_1" class="btn btn-selected">Chance of winning</button>
@@ -84,7 +155,7 @@ title: "index"
 
 </section>
 
-<section style="width:65%; margin:0 auto;">
+<section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
     <div style="height: 40em;" class="text-center">
         <div class="btn-group-2" style="margin: 0 auto;">
             <button id="ev_gap_1" class="btn btn-selected">Popular Vote Chances</button>
@@ -109,7 +180,7 @@ title: "index"
         </div>
     </div>
 </section>
-<section style="width:65%; margin:0 auto;">
+<section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
     <div style="height: 40em;">
         <div class="text-center h4 strong">95% of our simulations have Harris winning between {{ site.data.facts_other[0].harris_mean_ev_lower | round }} and {{ site.data.facts_other[0].harris_mean_ev_upper | round }} </div>
         <p class="text-center small"> Hover over each electoral vote margin to find the probability of that result.</p>
@@ -122,3 +193,4 @@ title: "index"
     </div>
 
 </section>
+

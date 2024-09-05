@@ -78,4 +78,28 @@ $(document).ready(function(){
 
         $(`#${iframe_id}`).attr('src', src);
     });
+
+    $("#us_cartogram").on('load',function(){
+        console.log(this.contentDocument)
+    })
+
 });
+
+// var us_cartogram = document.getElementById("us_cartogram");
+
+// us_cartogram.onload = function() {
+//     var svgDoc = us_cartogram.contentDocument; // Access the SVG document
+
+//     if (svgDoc) {
+//         var paths = svgDoc.querySelectorAll('path');
+
+//         for(let i=0; i<paths.length; i++){
+//             var path = paths[i]
+//             if(path.getAttribute('inkscape:label').includes('ca-')){
+//                 path.style.fill = "blue"; // Green color
+//             }
+//         }
+//     } else {
+//         console.log('Failed to access the SVG document.');
+//     }
+// };
