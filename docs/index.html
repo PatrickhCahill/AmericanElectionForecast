@@ -3,104 +3,134 @@ layout: home_page
 title: "index"
 ---
 <style>
-    .btn-selected {background-color: grey;}
-</style>
-<style>
-    #hoverbar {
-        position: fixed;
-        background-color: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-family: Arial, sans-serif;
-        /* font-size: 20em; */
-        display: none;
-        pointer-events: none; /* Prevents hoverbar from interfering with mouse events */
+    .btn-selected {
+        background-color: grey;
     }
+
+    .characterisation {
+        line-height: 1;
+
+        font-family: sans-serif;
+
+        font-size: small;
+        width: 14%;
+        height: 100%;
+        text-align: center;
+    }
+
+    .characterisation_num {
+        font-family: sans-serif;
+
+        font-size: smaller;
+        width: 14%;
+        height: 100%;
+        text-align: center;
+    }
+
+    #hoverbar {
+        font-size: 14px;
+        font-family: sans-serif;
+
+    }
+
+    /* @media only screen and (max-width: 600px) {
+        .repsonsive_characterisation{
+            height: 20px;
+            background-color: lightblue;
+        }
+    } */
 </style>
-<div id="hoverbar"></div>
-
-<!-- <section style="width:30%; margin:0 auto; height:500px; justify-content: end;">
-    <div style="margin: auto auto; max-width: 450px; height: 100%; width:100%" >
-
-        <object class id="us_cartogram" type="image/svg+xml" data={{"/assets/noinkscape_updated.svg" | relative_url}} height="100%" width="100%"></object>
-    </div>
-</section> -->
-
-
-<script src="https://d3js.org/d3.v7.min.js"></script>
-
-<!-- <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Select the SVG element after it has loaded
-        d3.select("#us_cartogram").on("load", function() {
-            // Access the SVG document
-            const svgDoc = d3.select(this).node().contentDocument;
-
-            // Select the element with id 'ca22' and change its color to blue
-            d3.select(svgDoc.getElementById("ca-22"))
-                .style("fill", "blue");
-
-            // Select all paths in the SVG
-            const allPaths = d3.select(svgDoc).selectAll("path");
-
-            // Get the hoverbar element
-            const hoverbar = d3.select("#hoverbar");
-
-            // Apply a hover effect to all paths
-            allPaths.on("mouseover", function (event) {
-                // Make all paths more transparent except the hovered one
-                allPaths.style("opacity", 0.3);
-                d3.select(this).style("opacity", 1);
-
-                // Get the bounding box of the hovered element
-                const bbox = this.getBBox();
-
-                // Update and show the hoverbar with the ID of the hovered element
-                hoverbar
-                    .style("display", "block")
-                    .text(this.id)
-                    .style("left", (bbox.x + bbox.width + 10) + "px") // Place hover bar to the right of the element
-                    .style("top", (bbox.y + (bbox.height) - 10) + "px"); // Vertically center it relative to the element
-            }).on("mouseout", function () {
-                // Reset the opacity of all paths
-                allPaths.style("opacity", 1);
-
-                // Hide the hoverbar
-                hoverbar.style("display", "none");
-            });
-
-
-        
-            });
-    });
-</script> -->
-
 
 <section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
-    <div style="height: 40em;">
-        <div class="text-center h4 strong">How the race breaks down in each state</div>
-        <p class="text-center small"> Hover over each for the probability that Trump or Harris will win it. Each state
-            will deliver one of the candidates their electoral votes. The one who receives 270 wins the election.</p>
-        <iframe src="assets/chloropleth.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
-        <!-- <div style="width:inherit; margin: 0 auto;">
-        <div class="chloro_text_container">
-            <div class="left">
-                <i><b><span class="name harris">Harris</span>
-                        <span class="number"> wins {{ site.data.facts.harris_prob }} out of 100 </i></b> </span>
-            </div>
-            <div class="right">
-                <i><b><span class="name trump">Trump</span>
-                        <span class="number"> wins {{ site.data.facts.trump_prob }} out of 100 </i></b> </span>
-            </div>
+    <h2 class="text-center">How the race breaks down in each state</h2>
+    <p class="text-center">The race to the Whitehouse is fought state by state. Many states are solid for one candidate
+        or another, but some are close. It's those swing states and their electoral votes that will help put one
+        candidate over the top and win them the election.</p>
+    <div class="text-center">
+        <div class="btn_group_map_or_cartogram" style="margin: 0 auto;">
+            <button id="electoral_cartogram_btn" class="btn btn-selected">Cartogram</button>
+            <button id="electoral_map_btn" class="btn">Map</button>
         </div>
-    </div> -->
-
     </div>
+
+    <div style="display:none; margin-bottom: 20px; width: 100%; margin: 0 auto;  height:80vh;" id="electoral_map">
+        <div id="hoverbar"
+            style="display:flex; width:200px; justify-content: space-between; height:70px; align-items: center; margin: 0 auto">
+            <div style='margin: 0 auto' ; class='text-center'> Hover over text to see details</div>
+        </div>
+        <div style="display: flex; width: 100%; height: 10px; justify-content: space-between;">
+            <div style="width: 14%; height: 100%; background-color: rgb(17, 109, 194);"></div> <!-- Solid Harris -->
+            <div style="width: 14%; height: 100%; background-color: rgb(95, 150, 201);"></div>
+            <!-- Likely Harris -->
+            <div style="width: 14%; height: 100%; background-color: rgb(153, 180, 206);"></div><!-- Lean Harris -->
+            <!-- <div style="width: 14%; height: 100%; background-color: rgb(192, 201, 209);"></div>-->
+            <!-- Tilt Harris -->
+            <div style="width: 14%; height: 100%; background-color: rgb(211, 211, 211);"></div> <!-- Tossup -->
+            <div style="width: 14%; height: 100%; background-color: rgb(211, 192, 192);"></div> <!-- Tilt Trump -->
+            <!-- <div style="width: 14%; height: 100%; background-color: rgb(210, 153, 153);"></div> Lean Trump -->
+            <div style="width: 14%; height: 100%; background-color: rgb(209, 96, 96)"></div> <!-- Likely Trump -->
+            <div style="width: 14%; height: 100%; background-color: rgb(207, 19, 19);"></div> <!-- Solid Trump -->
+        </div>
+        <div class="characterisation repsonsive_characterisation"
+            style="display: flex; width: 100%; height: 10px; justify-content: space-between;">
+            <div class="characterisation">Solid Harris</div>
+            <!-- Solid Harris -->
+            <div class="characterisation">Likely Harris</div>
+            <!-- Likely Harris -->
+            <div class="characterisation">Lean Harris</div>
+            <!-- Lean Harris -->
+            <!-- <div class="characterisation">Tilt Harris</div>-->
+            <!-- Tilt Harris -->
+            <div class="characterisation">Tossup</div>
+            <!-- Tossup -->
+            <!-- <div class="characterisation" style="width: 14%; height: 100%; text-align: center;">Tilt Trump</div> -->
+            <!-- Tilt Trump -->
+            <div class="characterisation">Lean Trump</div>
+            <!-- Lean Trump -->
+            <div class="characterisation">Likely Trump</div>
+            <!-- Likely Trump -->
+            <div class="characterisation">Solid Trump</div>
+            <!-- Solid Trump -->
+        </div>
+        <div class="characterisation repsonsive_characterisation"
+            style="display: flex; width: 100%; height: 10px; justify-content: space-between">
+            <div class="characterisation_num">&#8805;90 in 100
+            </div>
+            <!-- Solid Harris -->
+            <div class="characterisation_num">&#8805;70 in 100
+            </div>
+            <!-- Likely Harris -->
+            <div class="characterisation_num">&#8805;60 in 100
+            </div>
+            <!-- Lean Harris -->
+            <!-- <div class="characterisation" style="width: 14%; height: 100%; text-align: center;">Tilt Harris</div>-->
+            <!-- Tilt Harris -->
+            <div class="characterisation_num"> Both &lt;60 </div>
+            <!-- Tossup -->
+            <!-- <div class="characterisation" style="width: 14%; height: 100%; text-align: center;">Tilt Trump</div> -->
+            <!-- Tilt Trump -->
+            <div class="characterisation_num">&#8805;60 in 100
+            </div>
+            <!-- Lean Trump -->
+            <div class="characterisation_num">&#8805;70 in 100
+            </div>
+            <!-- Likely Trump -->
+            <div class="characterisation_num">&#8805;90 in 100
+            </div>
+            <!-- Solid Trump -->
+        </div>
+        <br>
+        <p style="text-align: center; font-family: sans-serif;">State characterisations according to our predicted
+            probabilitiy.</p>
+        <iframe src="assets/chloropleth.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
+    </div>
+    <iframe src="assets/cartogram.html" title="Election Polls" scrolling="no"
+        style="display:block;margin:0 auto; width:100%; height:80vh; max-height: calc(50%);"
+        id="electoral_cartogram"></iframe>
 
     <table style="width: 60%; margin: 0 auto;min-width: min(600px, 95vw)">
         <thead>
-            <tr >
+            <tr>
                 <th class="bottom-border">Electoral college</th>
                 <th class="bottom-border">Popular vote</th>
             </tr>
@@ -108,12 +138,12 @@ title: "index"
         <tbody>
             <tr>
                 <td class="bottom-border">
-                    <span class="color-cell" style="background-color: red;"></span> Donald Trump <span
-                        class="value">{{ site.data.facts_other[0].trump_mean_ev | round }}</span>
+                    <span class="color-cell" style="background-color: red;"></span> Donald Trump <span class="value">{{
+                        site.data.facts_other[0].trump_mean_ev | round }}</span>
                 </td>
                 <td class="bottom-border">
-                    <span class="color-cell" style="background-color: red;"></span> Donald Trump <span
-                        class="value">{{ site.data.facts_other[0].trump_mean_popular_vote |times: 100 | round: 1}}%</span>
+                    <span class="color-cell" style="background-color: red;"></span> Donald Trump <span class="value">{{
+                        site.data.facts_other[0].trump_mean_popular_vote |times: 100 | round: 1}}%</span>
                 </td>
             </tr>
             <tr>
@@ -123,7 +153,8 @@ title: "index"
                 </td>
                 <td class="bottom-border">
                     <span class="color-cell" style="background-color: blue;"></span> Kamala Harris <span
-                        class="value">{{ site.data.facts_other[0].harris_mean_popular_vote |times: 100 | round: 1}}%</span>
+                        class="value">{{ site.data.facts_other[0].harris_mean_popular_vote |times: 100 | round:
+                        1}}%</span>
                 </td>
             </tr>
             <tr>
@@ -131,7 +162,8 @@ title: "index"
                     <span class="color-cell" style="background-color: grey;"></span>Other <span class="value">0</span>
                 </td>
                 <td>
-                    <span class="color-cell" style="background-color: grey;"></span>Other <span class="value">{{ site.data.facts_other[0].other_mean_popular_vote |times: 100 | round: 1}}%</span>
+                    <span class="color-cell" style="background-color: grey;"></span>Other <span class="value">{{
+                        site.data.facts_other[0].other_mean_popular_vote |times: 100 | round: 1}}%</span>
                 </td>
             </tr>
         </tbody>
@@ -142,30 +174,44 @@ title: "index"
 {% include learn-more.html %}
 
 
-<section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
+<section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box; height:50em">
+    <h2 class="text-center">The race over time</h2>
+    <p class="text-center">Joe Biden dropping out of the race and Kamala Harris entering the race has drastically
+        changed the odds. Harris polling was worse than Biden's before he dropped out and she started with only a 20%
+        chance of winning. As we head into the final stretch, the story of the election should be reflected in these
+        numbers.</p>
+
     <div style="height: 40em;" class="text-center">
         <div class="btn-group-1" style="margin: 0 auto;">
             <button id="win_ev_pv_1" class="btn btn-selected">Chance of winning</button>
             <button id="win_ev_pv_2" class="btn">Electoral Votes</button>
             <button id="win_ev_pv_3" class="btn">Popular Vote</button>
         </div>
-        <iframe id="win_ev_pv" src="assets/win_probs.html"  title="Election Polls" style="width:80%; height:80%;"></iframe>
+        <iframe id="win_ev_pv" src="assets/win_probs.html" title="Election Polls"
+            style="width:80%; height:80%;"></iframe>
 
     </div>
 
 </section>
 
-<section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
+<section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box; height: 60em;">
+    <h2 class="text-center" style="margin:0 0">The system v. the People</h2>
+    <p class="text-center">The people's vote does not directly determine the winner of the presidential election. The
+        winner is the person who wins the vote in a subset of states whose electoral votes sum to 270. In 2016, Hillary
+        Clinton won the overall vote by running up the margins in California, New York and other safe Democratic states,
+        but she lost where it counted - across the Rust Belt of America. The Electoral College Gap is the gap between
+        the tipping point state and the popular vote - since Harris entered the race, it has been growing. So have the
+        chances that Trump wins the electoral college and but loses the popular vote, again.</p>
     <div style="height: 40em;" class="text-center">
         <div class="btn-group-2" style="margin: 0 auto;">
             <button id="ev_gap_1" class="btn btn-selected">Popular Vote Chances</button>
             <button id="ev_gap_2" class="btn">Electoral College Gap</button>
             <button id="ev_gap_3" class="btn">Mismatch chances</button>
         </div>
-        <iframe id="ev_gap" src="assets/popular_probs.html"  title="Election Polls" style="width:80%; height:80%;"></iframe>
+        <iframe id="ev_gap" src="assets/popular_probs.html" title="Election Polls"
+            style="width:80%; height:80%; scroll-behavior: smooth;"></iframe>
 
     </div>
-
 </section>
 
 <section class="bg-primary" id="about">
@@ -174,23 +220,35 @@ title: "index"
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <h2 class="section-heading">Getting into the nitty-gritty!</h2>
                 <hr class="light">
-                <p class="text-faded">The uncertainty in our forecast will decrease as we get to election day, all else being equal. If the polls get closer the election result will become less clear, if the margin for one candidate or another grows - the chance they win will increase. You can explore all the possibilities by looking at the histogram below.</p>
+                <p class="text-faded">The uncertainty in our forecast will decrease as we get to election day, all else
+                    being equal. If the polls get closer the election result will become less clear, if the margin for
+                    one candidate or another grows - the chance they win will increase. You can explore all the
+                    possibilities by looking at the histogram below.</p>
                 <!-- <a href="/how-it-works.html" class="btn btn-default btn-xl">Learn more!</a> -->
             </div>
         </div>
     </div>
 </section>
 <section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
+    <h2 class="text-center" style="margin:0 0">All the outcomes</h2>
+    <p>95% of our simulations have Harris winning between {{
+        site.data.facts_other[0].harris_mean_ev_lower | round }} and {{
+        site.data.facts_other[0].harris_mean_ev_upper | round }}. Each column is the probability of Harris or Trump
+        winning by that margin while the growing curve represent the cumulative probability of all those events put
+        together. We report the average outcome, but this is not the same as the single most likely outcome. In reality,
+        if Trump win one swing state, he is likely to win others so some combinations are more probable than others.</p>
     <div style="height: 40em;">
-        <div class="text-center h4 strong">95% of our simulations have Harris winning between {{ site.data.facts_other[0].harris_mean_ev_lower | round }} and {{ site.data.facts_other[0].harris_mean_ev_upper | round }} </div>
+
         <p class="text-center small"> Hover over each electoral vote margin to find the probability of that result.</p>
         <iframe src="assets/histogram.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
     </div>
+    <h2 class="text-center" style="margin:0 0">A graph inspired by 538.</h2>
+    <p>It's possible to win the popular vote but lose the electoral vote. This plot shows
+        a collection of 1000 simulations. The greyed out values show were one candidate won the electoral college
+        but the other won the popular vote. The <a style="scroll-behavior: smooth;" href="#ev_gap">chance of this</a> outcome occuring has grown
+        since Kamala Harris entered the race.</p>
     <div style="height: 40em;">
-        <div class="text-center h4 strong">What matters is the electoral college, but polls measure that national (or state) vote </div>
-        <p class="text-center small">It's possible to win the popular vote but lose the electoral vote. This plot shows a collection of 1000 simulations. The greyed out values show were one candidate won the electoral college but the other won the popular vote. The <a href="#ev_gap">chance of this</a> outcome occuring has grown since Kamala Harris entered the race.</p>
+        <p class="text-center small">The fivethirtyeight team publish their version of <a href="https://projects.fivethirtyeight.com/2024-election-forecast/#ec-vs-popular-vote">this graph</a> which inspired me to make this. What's notable is that the tails of my distributions are much smaller. Some of their electoral outcomes have one candidate or the other winning winning by over a 20 point margin - my uncertainty bounds are smaller. This likely means my model predictions are more confident (read arrogant) than their's.</p>
         <iframe src="assets/ev_vote.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
     </div>
-
 </section>
-

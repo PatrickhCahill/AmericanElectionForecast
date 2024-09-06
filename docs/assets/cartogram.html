@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+
+</head>
+<style>
+    #hoverbar {
+        font-size: 14px;
+        font-family: sans-serif;
+
+    }
+
+    .triangle {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 10px solid white;
+        margin-top: -2px;
+        position: absolute;
+        z-index: 10;
+        /* Ensures the triangle is on top */
+    }
+
+    .characterisation {
+        font-family: sans-serif;
+
+        font-size: small;
+        width: 14%;
+        height: 100%;
+        text-align: center;
+    }
+
+    .characterisation_num {
+        font-family: sans-serif;
+
+        font-size: smaller;
+        width: 14%;
+        height: 100%;
+        text-align: center;
+    }
+</style>
+
+<body>
+
+    <!-- solid>90
+likely>80
+lean>65
+tilt>55
+tossup -->
+
+
+    <section style="width:100%; margin:0 auto; justify-content: end;">
+        <div style="margin-bottom: 20px; width: 100%; margin: 0 auto;  height:60vh;" id="cartogram_wrapper">
+            <div id="hoverbar"
+                style="display:flex; width:200px; justify-content: space-between; height:70px; align-items: center; margin: 0 auto">
+                <div style='margin: 0 auto' ; class='text-center'> Hover over text to see details</div>
+            </div>
+            <div id="probability_indicator" class="triangle" style="display: none;"></div>
+            <div style="display: flex; width: 100%; height: 10px; justify-content: space-between;">
+                <div style="width: 14%; height: 100%; background-color: rgb(17, 109, 194);"></div> <!-- Solid Harris -->
+                <div style="width: 14%; height: 100%; background-color: rgb(95, 150, 201);"></div>
+                <!-- Likely Harris -->
+                <div style="width: 14%; height: 100%; background-color: rgb(153, 180, 206);"></div><!-- Lean Harris -->
+                <!-- <div style="width: 14%; height: 100%; background-color: rgb(192, 201, 209);"></div>-->
+                <!-- Tilt Harris -->
+                <div style="width: 14%; height: 100%; background-color: rgb(211, 211, 211);"></div> <!-- Tossup -->
+                <div style="width: 14%; height: 100%; background-color: rgb(211, 192, 192);"></div> <!-- Tilt Trump -->
+                <!-- <div style="width: 14%; height: 100%; background-color: rgb(210, 153, 153);"></div> Lean Trump -->
+                <div style="width: 14%; height: 100%; background-color: rgb(209, 96, 96)"></div> <!-- Likely Trump -->
+                <div style="width: 14%; height: 100%; background-color: rgb(207, 19, 19);"></div> <!-- Solid Trump -->
+            </div>
+            <div class="characterisation"
+                style="display: flex; width: 100%; height: 10px; justify-content: space-between;">
+                <div class="characterisation">Solid Harris</div>
+                <!-- Solid Harris -->
+                <div class="characterisation">Likely Harris</div>
+                <!-- Likely Harris -->
+                <div class="characterisation">Lean Harris</div>
+                <!-- Lean Harris -->
+                <!-- <div class="characterisation">Tilt Harris</div>-->
+                <!-- Tilt Harris -->
+                <div class="characterisation">Tossup</div>
+                <!-- Tossup -->
+                <!-- <div class="characterisation" style="width: 14%; height: 100%; text-align: center;">Tilt Trump</div> -->
+                <!-- Tilt Trump -->
+                <div class="characterisation">Lean Trump</div>
+                <!-- Lean Trump -->
+                <div class="characterisation">Likely Trump</div>
+                <!-- Likely Trump -->
+                <div class="characterisation">Solid Trump</div>
+                <!-- Solid Trump -->
+            </div>
+            <div class="characterisation"
+                style="display: flex; width: 100%; height: 10px; justify-content: space-between; padding-top: 4px;">
+                <div class="characterisation_num">&#8805;90 in 100
+                </div>
+                <!-- Solid Harris -->
+                <div class="characterisation_num">&#8805;70 in 100
+                </div>
+                <!-- Likely Harris -->
+                <div class="characterisation_num">&#8805;60 in 100
+                </div>
+                <!-- Lean Harris -->
+                <!-- <div class="characterisation" style="width: 14%; height: 100%; text-align: center;">Tilt Harris</div>-->
+                <!-- Tilt Harris -->
+                <div class="characterisation_num"> Both &lt;60 </div>
+                <!-- Tossup -->
+                <!-- <div class="characterisation" style="width: 14%; height: 100%; text-align: center;">Tilt Trump</div> -->
+                <!-- Tilt Trump -->
+                <div class="characterisation_num">&#8805;60 in 100
+                </div>
+                <!-- Lean Trump -->
+                <div class="characterisation_num">&#8805;70 in 100
+                </div>
+                <!-- Likely Trump -->
+                <div class="characterisation_num">&#8805;90 in 100
+                </div>
+                <!-- Solid Trump -->
+            </div>
+            <p style="text-align: center; font-family: sans-serif;">State characterisations according to our predicted
+                probabilitiy.</p>
+
+
+            <div style="margin: auto auto; height:100% ; width:100%"><object class id="us_cartogram"
+                    type="image/svg+xml" data="./noinkscape_updated.svg" height="100%" width="100%"></object></div>
+
+        </div>
+
+    </section>
+    <script>
+        const stateCodes = {
+            AL: 'Alabama',
+            AK: 'Alaska',
+            AZ: 'Arizona',
+            AR: 'Arkansas',
+            CA: 'California',
+            CO: 'Colorado',
+            CT: 'Connecticut',
+            DC: 'DC',
+            DE: 'Delaware',
+            FL: 'Florida',
+            GA: 'Georgia',
+            HI: 'Hawaii',
+            ID: 'Idaho',
+            IL: 'Illinois',
+            IN: 'Indiana',
+            IA: 'Iowa',
+            KS: 'Kansas',
+            KY: 'Kentucky',
+            LA: 'Louisiana',
+            ME: 'Maine',
+            MD: 'Maryland',
+            MA: 'Massachusetts',
+            MI: 'Michigan',
+            MN: 'Minnesota',
+            MS: 'Mississippi',
+            MO: 'Missouri',
+            MT: 'Montana',
+            NE: 'Nebraska',
+            NV: 'Nevada',
+            NH: 'New Hampshire',
+            NJ: 'New Jersey',
+            NM: 'New Mexico',
+            NY: 'New York',
+            NC: 'North Carolina',
+            ND: 'North Dakota',
+            OH: 'Ohio',
+            OK: 'Oklahoma',
+            OR: 'Oregon',
+            PA: 'Pennsylvania',
+            RI: 'Rhode Island',
+            SC: 'South Carolina',
+            SD: 'South Dakota',
+            TN: 'Tennessee',
+            TX: 'Texas',
+            UT: 'Utah',
+            VT: 'Vermont',
+            VA: 'Virginia',
+            WA: 'Washington',
+            WV: 'West Virginia',
+            WI: 'Wisconsin',
+            WY: 'Wyoming'
+        };
+
+
+        var cartogram_cmap = d3.scaleLinear()
+            .domain([0, 0.5, 1])  // Set the probabbility of harris win to range from 0 to 1
+            .range(["#cf1313", "lightgrey", "#116dc2"]);  // Output colour range
+        // Function on the actual cartogram - we then do some on "load"
+        d3.select("#us_cartogram").on("load", function () {
+            const svgDoc = d3.select(this).node().contentDocument; // Access the object
+
+
+            // Colour on all the ids to represent the probabilities of a Harris win
+            var elements = svgDoc.querySelectorAll("[id]");
+            var off_load_data = {};
+
+            d3.csv("../model_data/state_outputs.csv", function (data) {
+                const statePrefix = data['state'].toLowerCase();
+                d3.select(svgDoc)
+                    .selectAll(`[id^=${statePrefix}]`)
+                    .filter(function () {
+                        return this.id !== statePrefix + "-border"; // Do not colour in the borders of each state
+                    })
+                    .style("fill", cartogram_cmap(data['Probability Harris Win']));
+
+                off_load_data[data['state'].toLowerCase()] = data
+            });
+
+
+
+
+            // Instantiate the hover effects - get all  the paths so we can know which path we are hovering over.
+            const allPaths = d3.select(svgDoc).selectAll("path");
+            allPaths.style("opacity", 0.8); // Style everything to be greyed.
+
+            // Get hover bar element so we can manipulate it.
+            const hoverbar = d3.select("#hoverbar");
+            const probability_indicator = d3.select("#probability_indicator");
+
+            allPaths.on("mouseover", function (event) {
+                const cartogram_wrapper = d3.select("#cartogram_wrapper");
+                const cartogram_wrapper_width = cartogram_wrapper.node().offsetWidth;
+                const statePrefix = this.id.split('-')[0]; // When we hover we want to know which state we are hovering over. The id will be a specific hexagon in each state so we strip the element at the end.
+                const check = this.id.split('-')[1]
+                if (check != "border") { // Ignore any hovering over a border.
+
+
+                    if (statePrefix == "ne") { // Different for Nebraska
+                        // We want different behaviour if you hover over Nebraska electoral district EV or state-wide EV.
+                        if (Number(check) <= 3) {
+                            d3.select(this) // We want district specific hover behaviour
+                                .style("opacity", 1);
+                            // Update and show the hoverbar with the ID of the hovered element
+                            const ne_mapper = { "ne-1": "1st", "ne-2": "2nd", "ne-3": "3rd" }
+
+                            // var harris_win_chance = off_load_data[statePrefix]['Probability Harris Win']
+                            hoverbar
+                                .html(`<div><b>Nebraska's ${ne_mapper[this.id]}</b><br>CHANCE OF A WIN<br><span style="color:rgb(17, 109, 194)">Harris: <i>NYI</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>NYI</i> out of 100</span></div>`)
+                                .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px")
+                            probability_indicator
+                                .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
+                                .style('display', 'flex')
+
+
+                        } else {
+                            d3.select(svgDoc)
+                                .selectAll(["#ne-4", "#ne-5"]) // We want district specific hover behaviour
+                                .style("opacity", 1);
+                            // Update and show the hoverbar with the ID of the hovered element
+                            var harris_win_chance = off_load_data[statePrefix]['Probability Harris Win']
+
+                            hoverbar
+                                .html(`<div><b>Nebraska at large</b><br>CHANCE OF A WIN<br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
+                                .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px")
+                            probability_indicator
+                                .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
+                                .style('display', 'flex')
+                        }
+
+
+
+
+
+
+
+
+
+                    } else if (statePrefix == "me") { // Different for Nebraska
+                        // We want different behaviour if you hover over Nebraska electoral district EV or state-wide EV.
+                        if (Number(check) <= 2) {
+                            d3.select(this) // We want district specific hover behaviour
+                                .style("opacity", 1);
+                            // Update and show the hoverbar with the ID of the hovered element
+                            const me_mapper = { "me-1": "1st", "me-2": "2nd" }
+
+                            // var harris_win_chance = off_load_data[statePrefix]['Probability Harris Win']
+                            hoverbar
+                                .html(`<div><b>Maine's ${me_mapper[this.id]}</b><br>CHANCE OF A WIN<br><span style="color:rgb(17, 109, 194)">Harris: <i>NYI</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>NYI</i> out of 100</span></div>`)
+                                .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px")
+                            probability_indicator
+                                .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
+                                .style('display', 'flex')
+
+
+                        } else {
+                            d3.select(svgDoc)
+                                .selectAll(["#me-3", "#me-4"]) // We want district specific hover behaviour
+                                .style("opacity", 1);
+                            // Update and show the hoverbar with the ID of the hovered element
+                            var harris_win_chance = off_load_data[statePrefix]['Probability Harris Win']
+
+                            hoverbar
+                                .html(`<div><b>Maine at large</b><br>CHANCE OF A WIN<br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
+                                .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px")
+                            probability_indicator
+                                .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
+                                .style('display', 'flex')
+
+                        }
+
+                    } else { // Colour in the whole state fully
+                        d3.select(svgDoc)
+                            .selectAll(`[id^='${statePrefix}']`)
+                            .style("opacity", 1);
+
+                        // Update and show the hoverbar with the ID of the hovered element
+                        var harris_win_chance = off_load_data[statePrefix]['Probability Harris Win']
+
+                        hoverbar
+                            .html(`<div><b>${stateCodes[statePrefix.toUpperCase()]} - <span>${Math.round(off_load_data[statePrefix]['EV'])} EV's</span></b><br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
+                            .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px")
+                        probability_indicator
+                            .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
+                            .style('display', 'flex')
+
+                    }
+
+
+
+
+                }
+            }).on("mouseout", function () {
+                // Reset the opacity of all paths
+                allPaths.style("opacity", 0.8);
+
+                // Hide the hoverbar
+                hoverbar.html("<div style='margin: 0 auto'; class='text-center'> Hover over text to see details</div>")
+                    .style('margin', "0 auto");
+                probability_indicator.style("display", "none");
+            });
+            // allPaths.on("click", function (event) {
+            //     console.log("firing")
+            //     const statePrefix = this.id.split('-')[0]; // When we hover we want to know which state we are hovering over. The id will be a specific hexagon in each state so we strip the element at the end.
+            //     if (statePrefix in off_load_data) {
+            //         window.parent.location.href = "https://www.example.com";
+            //     }
+            // });
+
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>
