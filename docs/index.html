@@ -39,6 +39,12 @@ title: "index"
             background-color: lightblue;
         }
     } */
+    @media (max-width: 600px){
+        .map_table_text{
+            font-size: 10px;
+        }
+    }
+
 </style>
 
 <section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
@@ -48,85 +54,14 @@ title: "index"
         candidate over the top and win them the election.</p>
     <div class="text-center">
         <div class="btn_group_map_or_cartogram" style="margin: 0 auto;">
-            <button id="electoral_cartogram_btn" class="btn btn-selected">Cartogram</button>
-            <button id="electoral_map_btn" class="btn">Map</button>
+            <button id="electoral_map_1" class="btn btn-selected">Map</button>
+            <button id="electoral_map_2" class="btn">Cartogram</button>
         </div>
     </div>
 
-    <div style="display:none; margin-bottom: 20px; width: 100%; margin: 0 auto;  height:80vh;" id="electoral_map">
-        <div id="hoverbar"
-            style="display:flex; width:200px; justify-content: space-between; height:70px; align-items: center; margin: 0 auto">
-            <div style='margin: 0 auto' ; class='text-center'> Hover over text to see details</div>
-        </div>
-        <div style="display: flex; width: 100%; height: 10px; justify-content: space-between;">
-            <div style="width: 14%; height: 100%; background-color: rgb(17, 109, 194);"></div> <!-- Solid Harris -->
-            <div style="width: 14%; height: 100%; background-color: rgb(95, 150, 201);"></div>
-            <!-- Likely Harris -->
-            <div style="width: 14%; height: 100%; background-color: rgb(153, 180, 206);"></div><!-- Lean Harris -->
-            <!-- <div style="width: 14%; height: 100%; background-color: rgb(192, 201, 209);"></div>-->
-            <!-- Tilt Harris -->
-            <div style="width: 14%; height: 100%; background-color: rgb(211, 211, 211);"></div> <!-- Tossup -->
-            <div style="width: 14%; height: 100%; background-color: rgb(211, 192, 192);"></div> <!-- Tilt Trump -->
-            <!-- <div style="width: 14%; height: 100%; background-color: rgb(210, 153, 153);"></div> Lean Trump -->
-            <div style="width: 14%; height: 100%; background-color: rgb(209, 96, 96)"></div> <!-- Likely Trump -->
-            <div style="width: 14%; height: 100%; background-color: rgb(207, 19, 19);"></div> <!-- Solid Trump -->
-        </div>
-        <div class="characterisation repsonsive_characterisation"
-            style="display: flex; width: 100%; height: 10px; justify-content: space-between;">
-            <div class="characterisation">Solid Harris</div>
-            <!-- Solid Harris -->
-            <div class="characterisation">Likely Harris</div>
-            <!-- Likely Harris -->
-            <div class="characterisation">Lean Harris</div>
-            <!-- Lean Harris -->
-            <!-- <div class="characterisation">Tilt Harris</div>-->
-            <!-- Tilt Harris -->
-            <div class="characterisation">Tossup</div>
-            <!-- Tossup -->
-            <!-- <div class="characterisation" style="width: 14%; height: 100%; text-align: center;">Tilt Trump</div> -->
-            <!-- Tilt Trump -->
-            <div class="characterisation">Lean Trump</div>
-            <!-- Lean Trump -->
-            <div class="characterisation">Likely Trump</div>
-            <!-- Likely Trump -->
-            <div class="characterisation">Solid Trump</div>
-            <!-- Solid Trump -->
-        </div>
-        <div class="characterisation repsonsive_characterisation"
-            style="display: flex; width: 100%; height: 10px; justify-content: space-between">
-            <div class="characterisation_num">&#8805;90 in 100
-            </div>
-            <!-- Solid Harris -->
-            <div class="characterisation_num">&#8805;70 in 100
-            </div>
-            <!-- Likely Harris -->
-            <div class="characterisation_num">&#8805;60 in 100
-            </div>
-            <!-- Lean Harris -->
-            <!-- <div class="characterisation" style="width: 14%; height: 100%; text-align: center;">Tilt Harris</div>-->
-            <!-- Tilt Harris -->
-            <div class="characterisation_num"> Both &lt;60 </div>
-            <!-- Tossup -->
-            <!-- <div class="characterisation" style="width: 14%; height: 100%; text-align: center;">Tilt Trump</div> -->
-            <!-- Tilt Trump -->
-            <div class="characterisation_num">&#8805;60 in 100
-            </div>
-            <!-- Lean Trump -->
-            <div class="characterisation_num">&#8805;70 in 100
-            </div>
-            <!-- Likely Trump -->
-            <div class="characterisation_num">&#8805;90 in 100
-            </div>
-            <!-- Solid Trump -->
-        </div>
-        <br>
-        <p style="text-align: center; font-family: sans-serif;">State characterisations according to our predicted
-            probabilitiy.</p>
-        <iframe src="assets/chloropleth.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
-    </div>
-    <iframe src="assets/cartogram.html" title="Election Polls" scrolling="no"
-        style="display:block;margin:0 auto; width:100%; height:80vh; max-height: calc(50%);"
-        id="electoral_cartogram"></iframe>
+    <iframe src="assets/chloroplethd3.html" title="Election Polls" scrolling="no"
+        style="display:block;margin:0 auto; width:80%; height:60vh; max-height: calc(50%);"
+        id="electoral_map"></iframe>
 
     <table style="width: 60%; margin: 0 auto;min-width: min(600px, 95vw)">
         <thead>
@@ -138,32 +73,53 @@ title: "index"
         <tbody>
             <tr>
                 <td class="bottom-border">
-                    <span class="color-cell" style="background-color: red;"></span> Donald Trump <span class="value">{{
-                        site.data.facts_other[0].trump_mean_ev | round }}</span>
+                    <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="map_table_text">
+                        <span class="color-cell" style="background-color: red;"></span>
+                        Donald Trump
+                        <span class="value">{{site.data.facts_other[0].trump_mean_ev | round }}</span>
+                    </div>
                 </td>
                 <td class="bottom-border">
-                    <span class="color-cell" style="background-color: red;"></span> Donald Trump <span class="value">{{
-                        site.data.facts_other[0].trump_mean_popular_vote |times: 100 | round: 1}}%</span>
+                    <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="map_table_text">
+                        <span class="color-cell" style="background-color: red;"></span>
+                        Donald Trump
+                        <span class="value">{{site.data.facts_other[0].trump_mean_popular_vote |times: 100 | round:
+                            1}}%</span>
+                    </div>
+
                 </td>
             </tr>
             <tr>
                 <td class="bottom-border">
-                    <span class="color-cell" style="background-color: blue;"></span> Kamala Harris <span
-                        class="value">{{ site.data.facts_other[0].harris_mean_ev | round }}</span>
+                    <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="map_table_text">
+                        <span class="color-cell" style="background-color: blue;"></span>
+                        Kamala Harris
+                        <span class="value">{{ site.data.facts_other[0].harris_mean_ev | round }}</span>
+                    </div>
                 </td>
                 <td class="bottom-border">
-                    <span class="color-cell" style="background-color: blue;"></span> Kamala Harris <span
-                        class="value">{{ site.data.facts_other[0].harris_mean_popular_vote |times: 100 | round:
-                        1}}%</span>
+                    <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="map_table_text">
+                        <span class="color-cell" style="background-color: blue;"></span>
+                        Kamala Harris 
+                        <span class="value">{{ site.data.facts_other[0].harris_mean_popular_vote |times: 100 | round: 1}}%</span>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span class="color-cell" style="background-color: grey;"></span>Other <span class="value">0</span>
+                    <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="map_table_text">
+                        <span class="color-cell" style="background-color: grey;"></span>
+                        Other
+                        <span class="value">0</span>
+                    </div>
                 </td>
                 <td>
-                    <span class="color-cell" style="background-color: grey;"></span>Other <span class="value">{{
-                        site.data.facts_other[0].other_mean_popular_vote |times: 100 | round: 1}}%</span>
+                    <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="map_table_text">
+                        <span class="color-cell" style="background-color: grey;"></span>
+                        Other
+                        <span class="value">{{site.data.facts_other[0].other_mean_popular_vote |times: 100 | round: 1}}%</span>
+                    </div>
+
                 </td>
             </tr>
         </tbody>
@@ -245,10 +201,16 @@ title: "index"
     <h2 class="text-center" style="margin:0 0">A graph inspired by 538.</h2>
     <p>It's possible to win the popular vote but lose the electoral vote. This plot shows
         a collection of 1000 simulations. The greyed out values show were one candidate won the electoral college
-        but the other won the popular vote. The <a style="scroll-behavior: smooth;" href="#ev_gap">chance of this</a> outcome occuring has grown
+        but the other won the popular vote. The <a style="scroll-behavior: smooth;" href="#ev_gap">chance of this</a>
+        outcome occuring has grown
         since Kamala Harris entered the race.</p>
     <div style="height: 40em;">
-        <p class="text-center small">The fivethirtyeight team publish their version of <a href="https://projects.fivethirtyeight.com/2024-election-forecast/#ec-vs-popular-vote">this graph</a> which inspired me to make this. What's notable is that the tails of my distributions are much smaller. Some of their electoral outcomes have one candidate or the other winning winning by over a 20 point margin - my uncertainty bounds are smaller. This likely means my model predictions are more confident (read arrogant) than their's.</p>
+        <p class="text-center small">The fivethirtyeight team publish their version of <a
+                href="https://projects.fivethirtyeight.com/2024-election-forecast/#ec-vs-popular-vote">this graph</a>
+            which inspired me to make this. What's notable is that the tails of my distributions are much smaller. Some
+            of their electoral outcomes have one candidate or the other winning winning by over a 20 point margin - my
+            uncertainty bounds are smaller. This likely means my model predictions are more confident (read arrogant)
+            than their's.</p>
         <iframe src="assets/ev_vote.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
     </div>
 </section>

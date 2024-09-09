@@ -30,21 +30,26 @@
 
     .characterisation {
         font-family: sans-serif;
-
         font-size: small;
-        width: 14%;
         height: 100%;
         text-align: center;
     }
 
     .characterisation_num {
         font-family: sans-serif;
-
-        font-size: smaller;
-        width: 14%;
+        font-size: 10px;
         height: 100%;
         text-align: center;
     }
+    .svg-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
 </style>
 
 <body>
@@ -57,80 +62,60 @@ tossup -->
 
 
     <section style="width:100%; margin:0 auto; justify-content: end;">
+        <div id="hoverbar"
+            style="display:flex; width:200px; justify-content: space-between; height:70px; align-items: center; margin: 0 auto">
+            <div style='margin: 0 auto' ; class='text-center'> Hover over text to see details</div>
+        </div>
+        <div id="probability_indicator" class="triangle" style="display: none;"></div>
+        <div style="display: flex; width: 100%; height: 10px; justify-content: space-between; text-align: center;">
+            <div style="width: 9.8%; height: 100%; background-color: rgb(17, 109, 194);"></div>
+            <!-- Solid Harris -->
+            <div style="width: 19.8%; height: 100%; background-color: rgb(95, 150, 201);"></div>
+            <!-- Likely Harris -->
+            <div style="width: 9.8%; height: 100%; background-color: rgb(153, 180, 206);"></div><!-- Lean Harris -->
+            <!-- <div style="width: 14%; height: 100%; background-color: rgb(192, 201, 209);"></div>-->
+            <!-- Tilt Harris -->
+            <div style="width: 19.8%; height: 100%; background-color: rgb(211, 211, 211);"></div> <!-- Tossup -->
+            <!-- <div style="width: 9.8%; height: 100%; background-color: rgb(211, 192, 192);"></div> Tilt Trump -->
+            <div style="width: 9.8%; height: 100%; background-color: rgb(210, 153, 153);"></div> <!-- Lean Trump -->
+            <div style="width: 19.8%; height: 100%; background-color: rgb(209, 96, 96)"></div> <!-- Likely Trump -->
+            <div style="width: 9.8%; height: 100%; background-color: rgb(207, 19, 19);"></div> <!-- Solid Trump -->
+        </div>
+        <div style="display: flex; width: 100%; justify-content: space-between; text-align: center;">
+            <div style="width: 9.8%; height: 100%;" class="characterisation">Solid Harris</div>
+            <!-- Solid Harris -->
+            <div style="width: 19.8%; height: 100%;" class="characterisation">Likely Harris</div>
+            <!-- Likely Harris -->
+            <div style="width: 9.8%; height: 100%;" class="characterisation">Lean Harris</div>
+            <!-- <div style="width: 14%; height: 100%; background-color: rgb(192, 201, 209);"></div>-->
+            <!-- Tilt Harris -->
+            <div style="width: 19.8%; height: 100%;" class="characterisation">Tossup</div>
+            <div style="width: 9.8%; height: 100%;" class="characterisation">Lean Trump</div>
+            <!-- <div style="width: 14%; height: 100%; background-color: rgb(210, 153, 153);"></div> Lean Trump -->
+            <div style="width: 19.8%; height: 100%;" class="characterisation">Likely Trump</div>
+            <div style="width: 9.8%; height: 100%;" class="characterisation">Solid Trump</div>
+        </div>
+        <div style="display: flex; width: 100%; justify-content: space-between; text-align: center;">
+            <div style="width: 9.8%; height: 100%;" class="characterisation_num">&#8805;90 in 100</div>
+            <!-- Solid Harris -->
+            <div style="width: 19.8%; height: 100%;" class="characterisation_num">&#8805;70 in 100</div>
+            <!-- Likely Harris -->
+            <div style="width: 9.8%; height: 100%;" class="characterisation_num">&#8805;60 in 100</div>
+            <!-- <div style="width: 14%; height: 100%; background-color: rgb(192, 201, 209);"></div>-->
+            <!-- Tilt Harris -->
+            <div style="width: 19.8%; height: 100%;" class="characterisation_num">Both &lt;60</div>
+            <div style="width: 9.8%; height: 100%;" class="characterisation_num">&#8805;60 in 100</div>
+            <!-- <div style="width: 14%; height: 100%; background-color: rgb(210, 153, 153);"></div> Lean Trump -->
+            <div style="width: 19.8%; height: 100%;" class="characterisation_num">&#8805;70 in 100</div>
+            <div style="width: 9.8%; height: 100%;" class="characterisation_num">&#8805;90 in 100</div>
+        </div>
+        <p style="text-align: center; font-family: sans-serif;">State characterisations according to our predicted
+            probabilitiy.</p>
+
         <div style="margin-bottom: 20px; width: 100%; margin: 0 auto;  height:60vh;" id="cartogram_wrapper">
-            <div id="hoverbar"
-                style="display:flex; width:200px; justify-content: space-between; height:70px; align-items: center; margin: 0 auto">
-                <div style='margin: 0 auto' ; class='text-center'> Hover over text to see details</div>
+            <div class="svg-container">
+                <object class id="us_cartogram" type="image/svg+xml" data="./noinkscape_updated.svg" height="100%" width="100%"></object>
             </div>
-            <div id="probability_indicator" class="triangle" style="display: none;"></div>
-            <div style="display: flex; width: 100%; height: 10px; justify-content: space-between;">
-                <div style="width: 14%; height: 100%; background-color: rgb(17, 109, 194);"></div> <!-- Solid Harris -->
-                <div style="width: 14%; height: 100%; background-color: rgb(95, 150, 201);"></div>
-                <!-- Likely Harris -->
-                <div style="width: 14%; height: 100%; background-color: rgb(153, 180, 206);"></div><!-- Lean Harris -->
-                <!-- <div style="width: 14%; height: 100%; background-color: rgb(192, 201, 209);"></div>-->
-                <!-- Tilt Harris -->
-                <div style="width: 14%; height: 100%; background-color: rgb(211, 211, 211);"></div> <!-- Tossup -->
-                <div style="width: 14%; height: 100%; background-color: rgb(211, 192, 192);"></div> <!-- Tilt Trump -->
-                <!-- <div style="width: 14%; height: 100%; background-color: rgb(210, 153, 153);"></div> Lean Trump -->
-                <div style="width: 14%; height: 100%; background-color: rgb(209, 96, 96)"></div> <!-- Likely Trump -->
-                <div style="width: 14%; height: 100%; background-color: rgb(207, 19, 19);"></div> <!-- Solid Trump -->
-            </div>
-            <div class="characterisation"
-                style="display: flex; width: 100%; height: 10px; justify-content: space-between;">
-                <div class="characterisation">Solid Harris</div>
-                <!-- Solid Harris -->
-                <div class="characterisation">Likely Harris</div>
-                <!-- Likely Harris -->
-                <div class="characterisation">Lean Harris</div>
-                <!-- Lean Harris -->
-                <!-- <div class="characterisation">Tilt Harris</div>-->
-                <!-- Tilt Harris -->
-                <div class="characterisation">Tossup</div>
-                <!-- Tossup -->
-                <!-- <div class="characterisation" style="width: 14%; height: 100%; text-align: center;">Tilt Trump</div> -->
-                <!-- Tilt Trump -->
-                <div class="characterisation">Lean Trump</div>
-                <!-- Lean Trump -->
-                <div class="characterisation">Likely Trump</div>
-                <!-- Likely Trump -->
-                <div class="characterisation">Solid Trump</div>
-                <!-- Solid Trump -->
-            </div>
-            <div class="characterisation"
-                style="display: flex; width: 100%; height: 10px; justify-content: space-between; padding-top: 4px;">
-                <div class="characterisation_num">&#8805;90 in 100
-                </div>
-                <!-- Solid Harris -->
-                <div class="characterisation_num">&#8805;70 in 100
-                </div>
-                <!-- Likely Harris -->
-                <div class="characterisation_num">&#8805;60 in 100
-                </div>
-                <!-- Lean Harris -->
-                <!-- <div class="characterisation" style="width: 14%; height: 100%; text-align: center;">Tilt Harris</div>-->
-                <!-- Tilt Harris -->
-                <div class="characterisation_num"> Both &lt;60 </div>
-                <!-- Tossup -->
-                <!-- <div class="characterisation" style="width: 14%; height: 100%; text-align: center;">Tilt Trump</div> -->
-                <!-- Tilt Trump -->
-                <div class="characterisation_num">&#8805;60 in 100
-                </div>
-                <!-- Lean Trump -->
-                <div class="characterisation_num">&#8805;70 in 100
-                </div>
-                <!-- Likely Trump -->
-                <div class="characterisation_num">&#8805;90 in 100
-                </div>
-                <!-- Solid Trump -->
-            </div>
-            <p style="text-align: center; font-family: sans-serif;">State characterisations according to our predicted
-                probabilitiy.</p>
-
-
-            <div style="margin: auto auto; height:100% ; width:100%"><object class id="us_cartogram"
-                    type="image/svg+xml" data="./noinkscape_updated.svg" height="100%" width="100%"></object></div>
-
         </div>
 
     </section>

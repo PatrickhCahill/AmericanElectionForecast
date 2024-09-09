@@ -1,4 +1,4 @@
-$startDate = Get-Date "21-07-2024"
+$startDate = Get-Date "07-09-2024"
 $endDate = Get-Date
 
 for($i = $startDate; $i -le $endDate; $i = $i.AddDays(1))

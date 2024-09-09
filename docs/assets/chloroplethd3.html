@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Map with Transparent Background and Labels</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        #hoverbar {
+            font-size: 14px;
+            font-family: sans-serif;
+
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 10px solid white;
+            margin-top: -2px;
+            position: absolute;
+            z-index: 10;
+            /* Ensures the triangle is on top */
+        }
+
+        .characterisation {
+            font-family: sans-serif;
+            font-size: small;
+            height: 100%;
+            text-align: center;
+        }
+
+        .characterisation_num {
+            font-family: sans-serif;
+            font-size: 10px;
+            height: 100%;
+            text-align: center;
+        }
+
+        svg {
+            background-color: transparent;
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+        }
+
+        .label-text {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            text-anchor: middle;
+        }
+
+        .svg-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+    </style>
+</head>
+
+<body>
+    <section style="width:100%; margin:0 auto; justify-content: end;">
+            <div id="hoverbar"
+                style="display:flex; width:200px; justify-content: space-between; height:70px; align-items: center; margin: 0 auto">
+                <div style='margin: 0 auto' ; class='text-center'> Hover over text to see details</div>
+            </div>
+            <div id="probability_indicator" class="triangle" style="display: none;"></div>
+            <div style="display: flex; width: 100%; height: 10px; justify-content: space-between; text-align: center;">
+                <div style="width: 9.8%; height: 100%; background-color: rgb(17, 109, 194);"></div>
+                <!-- Solid Harris -->
+                <div style="width: 19.8%; height: 100%; background-color: rgb(95, 150, 201);"></div>
+                <!-- Likely Harris -->
+                <div style="width: 9.8%; height: 100%; background-color: rgb(153, 180, 206);"></div><!-- Lean Harris -->
+                <!-- <div style="width: 14%; height: 100%; background-color: rgb(192, 201, 209);"></div>-->
+                <!-- Tilt Harris -->
+                <div style="width: 19.8%; height: 100%; background-color: rgb(211, 211, 211);"></div> <!-- Tossup -->
+                <!-- <div style="width: 9.8%; height: 100%; background-color: rgb(211, 192, 192);"></div> Tilt Trump -->
+                <div style="width: 9.8%; height: 100%; background-color: rgb(210, 153, 153);"></div> <!-- Lean Trump -->
+                <div style="width: 19.8%; height: 100%; background-color: rgb(209, 96, 96)"></div> <!-- Likely Trump -->
+                <div style="width: 9.8%; height: 100%; background-color: rgb(207, 19, 19);"></div> <!-- Solid Trump -->
+            </div>
+            <div style="display: flex; width: 100%; justify-content: space-between; text-align: center;">
+                <div style="width: 9.8%; height: 100%;" class="characterisation">Solid Harris</div>
+                <!-- Solid Harris -->
+                <div style="width: 19.8%; height: 100%;" class="characterisation">Likely Harris</div>
+                <!-- Likely Harris -->
+                <div style="width: 9.8%; height: 100%;" class="characterisation">Lean Harris</div>
+                <!-- <div style="width: 14%; height: 100%; background-color: rgb(192, 201, 209);"></div>-->
+                <!-- Tilt Harris -->
+                <div style="width: 19.8%; height: 100%;" class="characterisation">Tossup</div>
+                <div style="width: 9.8%; height: 100%;" class="characterisation">Lean Trump</div>
+                <!-- <div style="width: 14%; height: 100%; background-color: rgb(210, 153, 153);"></div> Lean Trump -->
+                <div style="width: 19.8%; height: 100%;" class="characterisation">Likely Trump</div>
+                <div style="width: 9.8%; height: 100%;" class="characterisation">Solid Trump</div>
+            </div>
+            <div style="display: flex; width: 100%; justify-content: space-between; text-align: center;">
+                <div style="width: 9.8%; height: 100%;" class="characterisation_num">&#8805;90 in 100</div>
+                <!-- Solid Harris -->
+                <div style="width: 19.8%; height: 100%;" class="characterisation_num">&#8805;70 in 100</div>
+                <!-- Likely Harris -->
+                <div style="width: 9.8%; height: 100%;" class="characterisation_num">&#8805;60 in 100</div>
+                <!-- <div style="width: 14%; height: 100%; background-color: rgb(192, 201, 209);"></div>-->
+                <!-- Tilt Harris -->
+                <div style="width: 19.8%; height: 100%;" class="characterisation_num">Both &lt;60</div>
+                <div style="width: 9.8%; height: 100%;" class="characterisation_num">&#8805;60 in 100</div>
+                <!-- <div style="width: 14%; height: 100%; background-color: rgb(210, 153, 153);"></div> Lean Trump -->
+                <div style="width: 19.8%; height: 100%;" class="characterisation_num">&#8805;70 in 100</div>
+                <div style="width: 9.8%; height: 100%;" class="characterisation_num">&#8805;90 in 100</div>
+            </div>
+            <p style="text-align: center; font-family: sans-serif;">State characterisations according to our predicted
+                probabilitiy.</p>
+
+            <!-- <div style="margin: auto auto; height: 500px; width:800px;"><svg width="100%"
+                    height="100%" style="margin: 0 0;"></svg></div>
+        </div> -->
+        <div style="margin-bottom: 20px; width: 100%; margin: 0 auto;  height:60vh;" id="cartogram_wrapper">
+            <div class="svg-container">
+                <svg viewBox="0 0 960 600" preserveAspectRatio="xMidYMid meet"></svg>
+            </div>
+        </div>
+    </section>
+
+</body>
+<script>
+    function getKeyByValue(object, value) {
+        return Object.keys(object).find(key => object[key] === value);
+    }
+
+    const stateCodes = {
+        AL: 'Alabama',
+        AK: 'Alaska',
+        AZ: 'Arizona',
+        AR: 'Arkansas',
+        CA: 'California',
+        CO: 'Colorado',
+        CT: 'Connecticut',
+        DC: 'DC',
+        DE: 'Delaware',
+        FL: 'Florida',
+        GA: 'Georgia',
+        HI: 'Hawaii',
+        ID: 'Idaho',
+        IL: 'Illinois',
+        IN: 'Indiana',
+        IA: 'Iowa',
+        KS: 'Kansas',
+        KY: 'Kentucky',
+        LA: 'Louisiana',
+        ME: 'Maine',
+        MD: 'Maryland',
+        MA: 'Massachusetts',
+        MI: 'Michigan',
+        MN: 'Minnesota',
+        MS: 'Mississippi',
+        MO: 'Missouri',
+        MT: 'Montana',
+        NE: 'Nebraska',
+        NV: 'Nevada',
+        NH: 'New Hampshire',
+        NJ: 'New Jersey',
+        NM: 'New Mexico',
+        NY: 'New York',
+        NC: 'North Carolina',
+        ND: 'North Dakota',
+        OH: 'Ohio',
+        OK: 'Oklahoma',
+        OR: 'Oregon',
+        PA: 'Pennsylvania',
+        RI: 'Rhode Island',
+        SC: 'South Carolina',
+        SD: 'South Dakota',
+        TN: 'Tennessee',
+        TX: 'Texas',
+        UT: 'Utah',
+        VT: 'Vermont',
+        VA: 'Virginia',
+        WA: 'Washington',
+        WV: 'West Virginia',
+        WI: 'Wisconsin',
+        WY: 'Wyoming'
+    };
+    var cartogram_cmap = d3.scaleLinear()
+        .domain([0, 0.5, 1])  // Set the probabbility of harris win to range from 0 to 1
+        .range(["#cf1313", "lightgrey", "#116dc2"]);  // Output colour range
+
+
+    const width = 960;
+    const height = 600;
+
+    // Create SVG element
+    const svg = d3.select("svg");
+
+    // Define a projection and path generator
+    const projection = d3.geoAlbersUsa()
+        .translate([width / 2, height / 2])
+        .scale(1000);
+
+    const path = d3.geoPath().projection(projection);
+
+    var off_load_data = {};
+
+    d3.csv("../model_data/state_outputs.csv", function (model_data) {
+        const statePrefix = model_data['state'].toLowerCase();
+        off_load_data[model_data['state'].toLowerCase()] = model_data
+    });
+
+    // Load and process GeoJSON data
+    d3.json("us-states.json").then(function (geojson) {
+        // Filter out Puerto Rico and the District of Columbia
+        const filteredFeatures = geojson.features.filter(d =>
+            d.properties.name !== "Puerto Rico" &&
+            d.properties.name !== "District of Columbia");
+
+
+        // Bind the data and create one path per GeoJSON feature
+        svg.selectAll(".state")
+            .data(filteredFeatures.filter(d => d.properties.name !== "Puerto Rico" && d.properties.name !== "District of Columbia"))
+            .enter().append("path")
+            .attr("d", path)
+            .attr("id", d => d.properties.name)
+            .attr("class", "state for_hovering")
+            .style("stroke", "white")
+            .style("stroke-width", "0.3")
+            .style("fill", d => cartogram_cmap(off_load_data[getKeyByValue(stateCodes, d.properties.name).toLowerCase()]['Probability Harris Win']))
+
+        // Find the easternmost point in the data
+        let easternmost = -Infinity;
+
+        filteredFeatures.forEach(function (feature) {
+            feature.geometry.coordinates.forEach(function (coords) {
+                coords.forEach(function (coord) {
+                    // Check if the coordinate is a valid point
+                    const projected = projection(coord);
+                    if (projected && projected[0] > easternmost) {
+                        easternmost = projected[0];
+                    }
+                });
+            });
+        });
+
+        // Define square size and spacing
+        const squareSize = 40;
+        const spacing = 10;
+
+        // Define labels
+        const labels = ["DC", "NE-1", "NE-2", "NE-3", "ME-1", "ME-2"];
+
+        // Draw squares and add text labels
+        labels.forEach((label, i) => {
+            if (label.toLowerCase() in off_load_data) {
+
+                svg.append("rect")
+                    .attr("class", "label-square")
+                    .attr("id", label)
+                    .attr("x", easternmost + spacing)
+                    .attr("y", 150 + i * (squareSize + spacing))
+                    .attr("width", squareSize)
+                    .attr("height", squareSize)
+                    .style("fill", cartogram_cmap(off_load_data[label.toLowerCase()]['Probability Harris Win']))
+                red = Number((off_load_data[label.toLowerCase()]['Probability Harris Win']).slice(4, 7));
+                green = Number(cartogram_cmap(off_load_data[label.toLowerCase()]['Probability Harris Win']).slice(8, 12));
+                blue = Number(cartogram_cmap(off_load_data[label.toLowerCase()]['Probability Harris Win']).slice(14, 17));
+                let textcolor = "#ffffff"
+
+                if ((red * 0.299 + green * 0.587 + blue * 0.114) > 186) {
+                    textcolor = "#000000"
+                }
+
+                svg.append("text")
+                    .attr("class", "label-text")
+                    .attr("x", easternmost + spacing + squareSize / 2)
+                    .attr("y", 155 + i * (squareSize + spacing) + squareSize / 2)
+                    .attr("id", `${label}_text`)
+                    .text(label)
+                    .style("fill", textcolor);
+            }
+        });
+        // Instantiate the hover effects - get all the paths so we can know which path we are hovering over.
+        const allPaths = d3.selectAll("path.for_hovering, rect.label-square,text.label-text");
+        const non_text_Paths = d3.selectAll("path.for_hovering, rect.label-square");
+        allPaths.style("opacity", 0.8); // Style everything to be slightly transparent.
+
+        // Get hover bar element so we can manipulate it.
+        const hoverbar = d3.select("#hoverbar");
+        const probability_indicator = d3.select("#probability_indicator");
+        const cartogram_wrapper = d3.select("#cartogram_wrapper");
+        const cartogram_wrapper_width = cartogram_wrapper.node().offsetWidth;
+
+
+        allPaths.on("mouseover", function (event, d) {
+            let actual_id = this.id
+            if (this.id.includes("_text")) {
+                actual_id = this.id.slice(0, -5)
+            }
+
+            d3.select(`#${actual_id}`).style("opacity", 1);
+
+            const stateName = actual_id;
+
+
+            if (stateName == "Nebraska" || stateName == "Maine") {
+                const stateData = off_load_data[getKeyByValue(stateCodes, stateName).toLowerCase()];
+                const harris_win_chance = stateData['Probability Harris Win'];
+                hoverbar
+                    .html(`<div><b>${stateName} at large - <span>2 EV's</span></b><br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
+                    .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px");
+                probability_indicator
+                    .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
+                    .style('display', 'flex');
+            } else if (Object.values(stateCodes).includes(stateName)) {
+                const stateData = off_load_data[getKeyByValue(stateCodes, stateName).toLowerCase()];
+                const harris_win_chance = stateData['Probability Harris Win'];
+                hoverbar
+                    .html(`<div><b>${stateName} - <span>${Math.round(off_load_data[getKeyByValue(stateCodes, stateName).toLowerCase()]['EV'])} EV's</span></b><br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
+                    .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px");
+                probability_indicator
+                    .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
+                    .style('display', 'flex');
+            } else { // This should be Maine or Nebraska's electoral districts
+                const statePrefix = actual_id.split("-")[0];
+                const district_num = actual_id.split("-")[1];
+                const stateData = off_load_data[actual_id.toLowerCase()];
+                const harris_win_chance = stateData['Probability Harris Win'];
+
+                let nummapper = { '1': '1st', '2': '2nd', '3': '3rd' };
+                hoverbar
+                    .html(`<div><b>${stateName}'s ${nummapper[district_num]} - <span>${Math.round(off_load_data[statePrefix.toLowerCase()]['EV'])} EV's</span></b><br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
+                    .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px");
+                probability_indicator
+                    .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
+                    .style('display', 'flex');
+            }
+
+        })
+            .on("mouseout", function () {
+                // Reset the opacity of all paths
+                allPaths.style("opacity", 0.8);
+
+                // Hide the hoverbar
+                hoverbar.html("<div style='margin: 0 auto'; class='text-center'> Hover over text to see details</div>")
+                    .style('margin', "0 auto");
+                probability_indicator.style("display", "none");
+            });
+
+    });
+
+</script>
+
+</html>

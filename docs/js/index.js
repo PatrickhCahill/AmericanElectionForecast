@@ -50,16 +50,19 @@ $(document).ready(function () {
         $('.btn_group_map_or_cartogram button').removeClass('btn-selected');
         $(this).addClass('btn-selected');
 
-        var btn_id = $(this).attr('id');
-        var div_id = btn_id.slice(0,-4);
-        const map_ids = ["electoral_cartogram","electoral_map"];
-        if(div_id==map_ids[0]){
-            $(`#${div_id}`).show();
-            $(`#${map_ids[1]}`).hide();
+        var graph = $(this).attr('id');
+        var iframe_id = graph.slice(0, -2);
+        var src = '';
+        switch (graph) {
+            case 'electoral_map_2':
+                src = 'assets/cartogram.html';
+                break;
+            case 'electoral_map_1':
+                src = 'assets/chloroplethd3.html';
+                break;
         }
-        if(div_id==map_ids[1]){
-            $(`#${div_id}`).show();
-            $(`#${map_ids[0]}`).hide();
-        }
+
+        $(`#${iframe_id}`).attr('src', src);
     });
+
 });
