@@ -33,18 +33,27 @@ title: "index"
 
     }
 
+    .svg-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
     /* @media only screen and (max-width: 600px) {
         .repsonsive_characterisation{
             height: 20px;
             background-color: lightblue;
         }
     } */
-    @media (max-width: 600px){
-        .map_table_text{
+    @media (max-width: 600px) {
+        .map_table_text {
             font-size: 10px;
         }
     }
-
 </style>
 
 <section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
@@ -59,9 +68,8 @@ title: "index"
         </div>
     </div>
 
-    <iframe src="assets/chloroplethd3.html" title="Election Polls" scrolling="no"
-        style="display:block;margin:0 auto; width:80%; height:60vh; min-height:500px;"
-        id="electoral_map"></iframe>
+    <embed src="assets/chloroplethd3.html" title="Election Polls" scrolling="no"
+        style="display:block;margin:0 auto; width:80%; height:60vh; min-height:500px;" id="electoral_map"></embed>
 
     <table style="width: 60%; margin: 0 auto;min-width: min(600px, 95vw)">
         <thead>
@@ -100,8 +108,9 @@ title: "index"
                 <td class="bottom-border">
                     <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="map_table_text">
                         <span class="color-cell" style="background-color: blue;"></span>
-                        Kamala Harris 
-                        <span class="value">{{ site.data.facts_other[0].harris_mean_popular_vote |times: 100 | round: 1}}%</span>
+                        Kamala Harris
+                        <span class="value">{{ site.data.facts_other[0].harris_mean_popular_vote |times: 100 | round:
+                            1}}%</span>
                     </div>
                 </td>
             </tr>
@@ -117,7 +126,8 @@ title: "index"
                     <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="map_table_text">
                         <span class="color-cell" style="background-color: grey;"></span>
                         Other
-                        <span class="value">{{site.data.facts_other[0].other_mean_popular_vote |times: 100 | round: 1}}%</span>
+                        <span class="value">{{site.data.facts_other[0].other_mean_popular_vote |times: 100 | round:
+                            1}}%</span>
                     </div>
 
                 </td>
@@ -137,14 +147,18 @@ title: "index"
         chance of winning. As we head into the final stretch, the story of the election should be reflected in these
         numbers.</p>
 
-    <div style="height: 40em;" class="text-center">
+    <div class="text-center">
         <div class="btn-group-1" style="margin: 0 auto;">
             <button id="win_ev_pv_1" class="btn btn-selected">Chance of winning</button>
             <button id="win_ev_pv_2" class="btn">Electoral Votes</button>
             <button id="win_ev_pv_3" class="btn">Popular Vote</button>
         </div>
+    </div>
+    <div class="svg-container" style="max-height: 500px;">
         <iframe id="win_ev_pv" src="assets/win_probs.html" title="Election Polls"
-            style="width:80%; height:80%;"></iframe>
+            style="width:100%; height:100%;"></iframe>
+    </div>
+
 
     </div>
 
@@ -158,16 +172,18 @@ title: "index"
         but she lost where it counted - across the Rust Belt of America. The Electoral College Gap is the gap between
         the tipping point state and the popular vote - since Harris entered the race, it has been growing. So have the
         chances that Trump wins the electoral college and but loses the popular vote, again.</p>
-    <div style="height: 40em;" class="text-center">
+    <div class="text-center">
         <div class="btn-group-2" style="margin: 0 auto;">
             <button id="ev_gap_1" class="btn btn-selected">Popular Vote Chances</button>
             <button id="ev_gap_2" class="btn">Electoral College Gap</button>
             <button id="ev_gap_3" class="btn">Mismatch chances</button>
         </div>
-        <iframe id="ev_gap" src="assets/popular_probs.html" title="Election Polls"
-            style="width:80%; height:80%; scroll-behavior: smooth;"></iframe>
-
     </div>
+    <div class="svg-container" style="max-height: 500px;">
+        <iframe id="ev_gap" src="assets/popular_probs.html" title="Election Polls"
+            style="width:100%; height:100%;"></iframe>
+    </div>
+
 </section>
 
 <section class="bg-primary" id="about">
@@ -185,7 +201,7 @@ title: "index"
         </div>
     </div>
 </section>
-<section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
+<section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box; height: 100em;">
     <h2 class="text-center" style="margin:0 0">All the outcomes</h2>
     <p>95% of our simulations have Harris winning between {{
         site.data.facts_other[0].harris_mean_ev_lower | round }} and {{
@@ -193,9 +209,8 @@ title: "index"
         winning by that margin while the growing curve represent the cumulative probability of all those events put
         together. We report the average outcome, but this is not the same as the single most likely outcome. In reality,
         if Trump win one swing state, he is likely to win others so some combinations are more probable than others.</p>
-    <div style="height: 40em;">
-
-        <p class="text-center small"> Hover over each electoral vote margin to find the probability of that result.</p>
+    <p class="text-center small"> Hover over each electoral vote margin to find the probability of that result.</p>
+    <div class="svg-container" style="max-height: 500px;">
         <iframe src="assets/histogram.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
     </div>
     <h2 class="text-center" style="margin:0 0">A graph inspired by 538.</h2>
@@ -204,13 +219,14 @@ title: "index"
         but the other won the popular vote. The <a style="scroll-behavior: smooth;" href="#ev_gap">chance of this</a>
         outcome occuring has grown
         since Kamala Harris entered the race.</p>
-    <div style="height: 40em;">
-        <p class="text-center small">The fivethirtyeight team publish their version of <a
-                href="https://projects.fivethirtyeight.com/2024-election-forecast/#ec-vs-popular-vote">this graph</a>
-            which inspired me to make this. What's notable is that the tails of my distributions are much smaller. Some
-            of their electoral outcomes have one candidate or the other winning winning by over a 20 point margin - my
-            uncertainty bounds are smaller. This likely means my model predictions are more confident (read arrogant)
-            than their's.</p>
-        <iframe src="assets/ev_vote.html" title="Election Polls" style="width:100%; height:80%;"></iframe>
+    <p class="text-center small">The fivethirtyeight team publish their version of <a
+            href="https://projects.fivethirtyeight.com/2024-election-forecast/#ec-vs-popular-vote">this graph</a>
+        which inspired me to make this. What's notable is that the tails of my distributions are much smaller. Some
+        of their electoral outcomes have one candidate or the other winning winning by over a 20 point margin - my
+        uncertainty bounds are smaller. This likely means my model predictions are more confident (read arrogant)
+        than their's.</p>
+    <div class="svg-container" style="max-height: 500px;">
+        <iframe src="assets/ev_vote.html" title="Election Polls" style="width:100%; height:80%;"
+            style="width:100%; height:100%;"></iframe>
     </div>
 </section>
