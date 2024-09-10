@@ -121,7 +121,7 @@
         <!-- <div style="margin: auto auto; height: 500px; width:800px;"><svg width="100%"
                     height="100%" style="margin: 0 0;"></svg></div>
         </div> -->
-        <div style="margin-bottom: 20px; width: 100%; margin: 0 auto;  height:60vh;" id="cartogram_wrapper">
+        <div style="margin-bottom: 20px; width: 100%; margin: 0 auto; height: 63vw" id="cartogram_wrapper">
             <div class="svg-container">
                 <svg viewBox="0 0 960 600" preserveAspectRatio="xMidYMid meet" id="us_map"></svg>
             </div>
@@ -217,8 +217,8 @@
         d3.json("us-states.json").then(function (geojson) {
             // Filter out Puerto Rico and the District of Columbia
             const filteredFeatures = geojson.features.filter(d =>
-                d.properties.name !== "Puerto Rico" &&
-                d.properties.name !== "District of Columbia");
+                d.properties.NAME !== "Puerto Rico" &&
+                d.properties.NAME !== "District of Columbia");
 
 
             // Bind the data and create one path per GeoJSON feature
@@ -226,10 +226,10 @@
                 .data(filteredFeatures.filter(d => d.properties.name !== "Puerto Rico" && d.properties.name !== "District of Columbia"))
                 .enter().append("path")
                 .attr("d", path)
-                .attr("id", d => d.properties.name)
+                .attr("id", d => d.properties.name.replace(" ", '_'))
                 .attr("class", "state for_hovering")
                 .style("stroke", "white")
-                .style("stroke-width", "0.3")
+                .style("stroke-width", "0.3%")
                 .style("fill", d => cartogram_cmap(off_load_data[getKeyByValue(stateCodes, d.properties.name).toLowerCase()]['Probability Harris Win']))
 
             // Find the easternmost point in the data
@@ -260,8 +260,8 @@
 
                     svg.append("rect")
                         .attr("class", "label-square")
-                        .attr("id", label)
-                        .attr("x", easternmost + spacing)
+                        .attr("id", label.replace(" ", '_'))
+                        .attr("x", easternmost + spacing + squareSize)
                         .attr("y", 150 + i * (squareSize + spacing))
                         .attr("width", squareSize)
                         .attr("height", squareSize)
@@ -277,7 +277,7 @@
 
                     svg.append("text")
                         .attr("class", "label-text")
-                        .attr("x", easternmost + spacing + squareSize / 2)
+                        .attr("x", easternmost + spacing + 3 * squareSize / 2)
                         .attr("y", 155 + i * (squareSize + spacing) + squareSize / 2)
                         .attr("id", `${label}_text`)
                         .text(label)
@@ -288,7 +288,7 @@
             const allPaths = d3.selectAll("path.for_hovering, rect.label-square,text.label-text");
             const non_text_Paths = d3.selectAll("path.for_hovering, rect.label-square");
             allPaths.style("opacity", 0.8); // Style everything to be slightly transparent.
-
+            console.log(allPaths)
             // Get hover bar element so we can manipulate it.
             const hoverbar = d3.select("#hoverbar");
             const probability_indicator = d3.select("#probability_indicator");
@@ -301,10 +301,10 @@
                 if (this.id.includes("_text")) {
                     actual_id = this.id.slice(0, -5)
                 }
-
+                console.log(`#${actual_id}`)
                 d3.select(`#${actual_id}`).style("opacity", 1);
 
-                const stateName = actual_id;
+                const stateName = actual_id.replace("_"," ");
 
 
                 if (stateName == "Nebraska" || stateName == "Maine") {
