@@ -92,14 +92,14 @@ title: "index"
                     <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="map_table_text">
                         <span class="color-cell" style="background-color: red;"></span>
                         Donald Trump
-                        <span class="value">{{site.data.facts_other[0].trump_mean_ev | round }}</span>
+                        <span class="value">{{site.data.splash_text[0].trump_mean_ev | round }}</span>
                     </div>
                 </td>
                 <td class="bottom-border">
                     <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="map_table_text">
                         <span class="color-cell" style="background-color: red;"></span>
                         Donald Trump
-                        <span class="value">{{site.data.facts_other[0].trump_mean_popular_vote |times: 100 | round:
+                        <span class="value">{{site.data.splash_text[0].trump_mean_popular_vote |times: 100 | round:
                             1}}%</span>
                     </div>
 
@@ -110,14 +110,14 @@ title: "index"
                     <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="map_table_text">
                         <span class="color-cell" style="background-color: blue;"></span>
                         Kamala Harris
-                        <span class="value">{{ site.data.facts_other[0].harris_mean_ev | round }}</span>
+                        <span class="value">{{ site.data.splash_text[0].harris_mean_ev | round }}</span>
                     </div>
                 </td>
                 <td class="bottom-border">
                     <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="map_table_text">
                         <span class="color-cell" style="background-color: blue;"></span>
                         Kamala Harris
-                        <span class="value">{{ site.data.facts_other[0].harris_mean_popular_vote |times: 100 | round:
+                        <span class="value">{{ site.data.splash_text[0].harris_mean_popular_vote |times: 100 | round:
                             1}}%</span>
                     </div>
                 </td>
@@ -134,7 +134,7 @@ title: "index"
                     <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="map_table_text">
                         <span class="color-cell" style="background-color: grey;"></span>
                         Other
-                        <span class="value">{{site.data.facts_other[0].other_mean_popular_vote |times: 100 | round:
+                        <span class="value">{{site.data.splash_text[0].other_mean_popular_vote |times: 100 | round:
                             1}}%</span>
                     </div>
 
@@ -215,8 +215,8 @@ title: "index"
     class="index_section">
     <h2 class="text-center" style="margin:0 0">All the outcomes</h2>
     <p>95% of our simulations have Harris winning between {{
-        site.data.facts_other[0].harris_mean_ev_lower | round }} and {{
-        site.data.facts_other[0].harris_mean_ev_upper | round }}. Each column is the probability of Harris or Trump
+        site.data.splash_text[0].harris_mean_ev_lower | round }} and {{
+        site.data.splash_text[0].harris_mean_ev_upper | round }}. Each column is the probability of Harris or Trump
         winning by that margin while the growing curve represent the cumulative probability of all those events put
         together. We report the average outcome, but this is not the same as the single most likely outcome. In reality,
         if Trump win one swing state, he is likely to win others so some combinations are more probable than others.</p>
