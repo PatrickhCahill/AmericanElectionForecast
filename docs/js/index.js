@@ -1,3 +1,8 @@
+function resize_electoral_map() {
+    const iframe = $('#electoral_map');
+    iframe.css('height', iframe.contents().find('body').height());
+}
+
 $(document).ready(function () {
     // Event handler for the first button group
     $('.btn-group-1 button').on('click', function () {
@@ -21,6 +26,9 @@ $(document).ready(function () {
 
         $(`#${iframe_id}`).attr('src', src);
     });
+
+
+
 
     // Event handler for the second button group
     $('.btn-group-2 button').on('click', function () {
@@ -64,5 +72,12 @@ $(document).ready(function () {
 
         $(`#${iframe_id}`).attr('src', src);
     });
+    resize_electoral_map();
+
+    // Adjust height when the iframe is loaded
+    $('#electoral_map').on('load', resize_electoral_map);
+
+    // Adjust height when the window is resized
+    $(window).on('resize', resize_electoral_map);
 
 });

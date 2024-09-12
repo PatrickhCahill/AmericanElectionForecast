@@ -62,7 +62,7 @@ tilt>55
 tossup -->
 
 
-    <section style="width:100%; margin:0 auto; justify-content: end;">
+    <section style="width:100%; margin:0 auto; display: flex; justify-content:space-between; flex-direction: column; padding-bottom: 10px;">
         <div id="hoverbar"
             style="display:flex; width:200px; justify-content: space-between; height:70px; align-items: center; margin: 0 auto">
             <div style='margin: 0 auto' ; class='text-center'> Hover over text to see details</div>
@@ -233,7 +233,7 @@ tossup -->
                                 .html(`<div><b>Nebraska's ${ne_mapper[this.id]} - <span>1 EV</span></b><br>CHANCE OF A WIN<br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
                             const hoverwidth = 160
                             hoverbar.style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - hoverwidth) + "px");
-                             probability_indicator
+                            probability_indicator
                                 .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
                                 .style('display', 'flex')
 
@@ -275,7 +275,7 @@ tossup -->
                                 .html(`<div><b>Maine's ${me_mapper[this.id]} - <span>1 EV</span></b><br>CHANCE OF A WIN<br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
                             const hoverwidth = 160
                             hoverbar.style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - hoverwidth) + "px");
-                             probability_indicator
+                            probability_indicator
                                 .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
                                 .style('display', 'flex')
 

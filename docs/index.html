@@ -43,6 +43,9 @@ title: "index"
         overflow: hidden;
     }
 
+    .section_container {
+        width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;
+    }
 
     /* @media only screen and (max-width: 600px) {
         .repsonsive_characterisation{
@@ -61,7 +64,7 @@ title: "index"
     }
 </style>
 
-<section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;">
+<section class="section_container">
     <h2 class="text-center">How the race breaks down in each state</h2>
     <p class="text-center">The race to the Whitehouse is fought state by state. Many states are solid for one candidate
         or another, but some are close. It's those swing states and their electoral votes that will help put one
@@ -73,13 +76,16 @@ title: "index"
         </div>
     </div>
 
-    <div style="position: relative; width: 100%; max-width: 1000px; padding-bottom: min(115%,720px); height: 0; overflow:hidden; margin: 0 auto;">
+    <!-- <div style="position: relative; width: 100%; max-width: 1000px; padding-bottom: min(115%,720px); height: 0; overflow:hidden; margin: 0 auto;">
         <iframe src="assets/chloroplethd3.html" title="Election Polls" scrolling="no"
             style="position:absolute; top:0; left:0; width:100%; height: 100%; border: 0;" id="electoral_map"></iframe>
-    </div>
+    </div> -->
+
+    <iframe src="assets/chloroplethd3.html" title="Election Map" frameborder="0" id="electoral_map" scrolling="no"></iframe>
+    
 
 
-    <table style="width: 60%; margin: 0 auto;min-width: min(600px, 95vw); background-color: rgba(0,0,0,0);">
+    <table style="width: 60%; margin: 0 auto;min-width: min(600px, 95vw); max-width: 1000px; background-color: rgba(0,0,0,0);" >
         <thead>
             <tr>
                 <th class="bottom-border">Electoral college</th>
@@ -148,8 +154,7 @@ title: "index"
 {% include learn-more.html %}
 
 
-<section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box; height:50em"
-    class="index_section">
+<section class="section_container index_section" style="height:50em">
     <h2 class="text-center">The race over time</h2>
     <p class="text-center">Joe Biden dropping out of the race and Kamala Harris entering the race has drastically
         changed the odds. Harris polling was worse than Biden's before he dropped out and she started with only a 20%
@@ -173,8 +178,7 @@ title: "index"
 
 </section>
 
-<section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box; height: 60em;"
-    class="index_section">
+<section class="section_container index_section" style="height:60em">
     <h2 class="text-center" style="margin:0 0">The system v. the People</h2>
     <p class="text-center">The people's vote does not directly determine the winner of the presidential election. The
         winner is the person who wins the vote in a subset of states whose electoral votes sum to 270. In 2016, Hillary
@@ -206,13 +210,12 @@ title: "index"
                     being equal. If the polls get closer the election result will become less clear, if the margin for
                     one candidate or another grows - the chance they win will increase. You can explore all the
                     possibilities by looking at the histogram below.</p>
-                <!-- <a href="/how-it-works.html" class="btn btn-default btn-xl">Learn more!</a> -->
+                <a href="/how-it-works.html" class="btn btn-default btn-xl">Learn more!</a>
             </div>
         </div>
     </div>
 </section>
-<section style="width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box; height: 100em;"
-    class="index_section">
+<section class="section_container index_section" style="height:100em">
     <h2 class="text-center" style="margin:0 0">All the outcomes</h2>
     <p>95% of our simulations have Harris winning between {{
         site.data.splash_text[0].harris_mean_ev_lower | round }} and {{
