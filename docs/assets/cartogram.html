@@ -227,12 +227,13 @@ tossup -->
                                 .style("opacity", 1);
                             // Update and show the hoverbar with the ID of the hovered element
                             const ne_mapper = { "ne-1": "1st", "ne-2": "2nd", "ne-3": "3rd" }
-
-                            // var harris_win_chance = off_load_data[statePrefix]['Probability Harris Win']
+                            // `${"ne".toUpperCase()}-${check}`
+                            var harris_win_chance = off_load_data[this.id]['Probability Harris Win']
                             hoverbar
-                                .html(`<div><b>Nebraska's ${ne_mapper[this.id]}</b><br>CHANCE OF A WIN<br><span style="color:rgb(17, 109, 194)">Harris: <i>NYI</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>NYI</i> out of 100</span></div>`)
-                                .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px")
-                            probability_indicator
+                                .html(`<div><b>Nebraska's ${ne_mapper[this.id]} - <span>1 EV</span></b><br>CHANCE OF A WIN<br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
+                            const hoverwidth = 160
+                            hoverbar.style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - hoverwidth) + "px");
+                             probability_indicator
                                 .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
                                 .style('display', 'flex')
 
@@ -245,8 +246,9 @@ tossup -->
                             var harris_win_chance = off_load_data[statePrefix]['Probability Harris Win']
 
                             hoverbar
-                                .html(`<div><b>Nebraska at large</b><br>CHANCE OF A WIN<br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
-                                .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px")
+                                .html(`<div><b>Nebraska at large - <span>2 EV's</span></b><br>CHANCE OF A WIN<br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
+                            const hoverwidth = 165
+                            hoverbar.style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - hoverwidth) + "px");
                             probability_indicator
                                 .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
                                 .style('display', 'flex')
@@ -268,11 +270,12 @@ tossup -->
                             // Update and show the hoverbar with the ID of the hovered element
                             const me_mapper = { "me-1": "1st", "me-2": "2nd" }
 
-                            // var harris_win_chance = off_load_data[statePrefix]['Probability Harris Win']
+                            var harris_win_chance = off_load_data[this.id]['Probability Harris Win']
                             hoverbar
-                                .html(`<div><b>Maine's ${me_mapper[this.id]}</b><br>CHANCE OF A WIN<br><span style="color:rgb(17, 109, 194)">Harris: <i>NYI</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>NYI</i> out of 100</span></div>`)
-                                .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px")
-                            probability_indicator
+                                .html(`<div><b>Maine's ${me_mapper[this.id]} - <span>1 EV</span></b><br>CHANCE OF A WIN<br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
+                            const hoverwidth = 160
+                            hoverbar.style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - hoverwidth) + "px");
+                             probability_indicator
                                 .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
                                 .style('display', 'flex')
 
@@ -285,8 +288,9 @@ tossup -->
                             var harris_win_chance = off_load_data[statePrefix]['Probability Harris Win']
 
                             hoverbar
-                                .html(`<div><b>Maine at large</b><br>CHANCE OF A WIN<br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
-                                .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px")
+                                .html(`<div><b>Maine at large - <span>2 EV's</span></b><br>CHANCE OF A WIN<br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
+                            const hoverwidth = 165
+                            hoverbar.style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - hoverwidth) + "px");
                             probability_indicator
                                 .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
                                 .style('display', 'flex')
@@ -303,7 +307,8 @@ tossup -->
 
                         hoverbar
                             .html(`<div><b>${stateCodes[statePrefix.toUpperCase()]} - <span>${Math.round(off_load_data[statePrefix]['EV'])} EV's</span></b><br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
-                            .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px")
+                        const hoverwidth = 150
+                        hoverbar.style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - hoverwidth) + "px");
                         probability_indicator
                             .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
                             .style('display', 'flex')

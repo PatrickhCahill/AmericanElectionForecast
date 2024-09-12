@@ -206,13 +206,17 @@
 
             var off_load_data = {};
 
-            d3.csv("../model_data/state_outputs.csv", function (model_data) {
-                const statePrefix = model_data['state'].toLowerCase();
-                off_load_data[model_data['state'].toLowerCase()] = model_data
-            });
+            // Load both CSV and GeoJSON data
+            Promise.all([
+                d3.csv("../model_data/state_outputs.csv"),
+                d3.json("../model_data/us-states.json")
+            ]).then(function ([model_data, geojson]) {
+                // Process the CSV data
+                model_data.forEach(function (d) {
+                    const statePrefix = d['state'].toLowerCase();
+                    off_load_data[statePrefix] = d;
+                });
 
-            // Load and process GeoJSON data
-            d3.json("../model_data/us-states.json").then(function (geojson) {
                 // Filter out Puerto Rico and the District of Columbia
                 const filteredFeatures = geojson.features.filter(d =>
                     d.properties.NAME !== "Puerto Rico" &&
@@ -286,7 +290,6 @@
                 const allPaths = d3.selectAll("path.for_hovering, rect.label-square,text.label-text");
                 const non_text_Paths = d3.selectAll("path.for_hovering, rect.label-square");
                 allPaths.style("opacity", 0.8); // Style everything to be slightly transparent.
-                console.log(allPaths)
                 // Get hover bar element so we can manipulate it.
                 const hoverbar = d3.select("#hoverbar");
                 const probability_indicator = d3.select("#probability_indicator");
@@ -299,18 +302,16 @@
                     if (this.id.includes("_text")) {
                         actual_id = this.id.slice(0, -5)
                     }
-                    console.log(`#${actual_id}`)
                     d3.select(`#${actual_id}`).style("opacity", 1);
 
                     const stateName = actual_id.replace("_", " ");
 
-
                     if (stateName == "Nebraska" || stateName == "Maine") {
                         const stateData = off_load_data[getKeyByValue(stateCodes, stateName).toLowerCase()];
                         const harris_win_chance = stateData['Probability Harris Win'];
-                        hoverbar
-                            .html(`<div><b>${stateName} at large - <span>2 EV's</span></b><br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
-                            .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px");
+                        hoverbar.html(`<div><b>${stateName} at large - <span>2 EV's</span></b><br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`);
+                        const hoverwidth = 165
+                        hoverbar.style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - hoverwidth) + "px");
                         probability_indicator
                             .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
                             .style('display', 'flex');
@@ -318,9 +319,11 @@
                         const stateData = off_load_data[getKeyByValue(stateCodes, stateName).toLowerCase()];
                         const harris_win_chance = stateData['Probability Harris Win'];
                         hoverbar
-                            .html(`<div><b>${stateName} - <span>${Math.round(off_load_data[getKeyByValue(stateCodes, stateName).toLowerCase()]['EV'])} EV's</span></b><br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
-                            .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px");
-                        probability_indicator
+                            .html(`<div><b>${stateName} - <span>${Math.round(off_load_data[getKeyByValue(stateCodes, stateName).toLowerCase()]['EV'])} EV's</span></b><br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`);
+                        const hoverwidth = 150
+                        hoverbar.style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - hoverwidth) + "px");
+
+                       probability_indicator
                             .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
                             .style('display', 'flex');
                     } else { // This should be Maine or Nebraska's electoral districts
@@ -331,8 +334,9 @@
 
                         let nummapper = { '1': '1st', '2': '2nd', '3': '3rd' };
                         hoverbar
-                            .html(`<div><b>${stateName}'s ${nummapper[district_num]} - <span>${Math.round(off_load_data[statePrefix.toLowerCase()]['EV'])} EV's</span></b><br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`)
-                            .style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - 130) + "px");
+                            .html(`<div><b>${stateCodes[statePrefix]}'s ${nummapper[district_num]} - <span>1 EV</span></b><br><span style="color:rgb(17, 109, 194)">Harris: <i>${Math.round(harris_win_chance * 100)}</i> out of 100</span><br><span style="color:rgb(207, 19, 19)">Trump: <i>${Math.round((1 - harris_win_chance) * 100)}</i> out of 100</span></div>`);
+                        const hoverwidth = 160
+                        hoverbar.style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - hoverwidth) + "px");
                         probability_indicator
                             .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
                             .style('display', 'flex');
@@ -349,7 +353,9 @@
                         probability_indicator.style("display", "none");
                     });
 
-            });
+            }).catch(function(error) {
+    console.error("Error loading data:", error);
+});
         });
     </script>
 
