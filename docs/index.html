@@ -44,7 +44,10 @@ title: "index"
     }
 
     .section_container {
-        width:65%; margin:0 auto; min-width: min(700px, 95vw); box-sizing: border-box;
+        width: 65%;
+        margin: 0 auto;
+        min-width: min(700px, 95vw);
+        box-sizing: border-box;
     }
 
     /* @media only screen and (max-width: 600px) {
@@ -80,12 +83,14 @@ title: "index"
         <iframe src="assets/chloroplethd3.html" title="Election Polls" scrolling="no"
             style="position:absolute; top:0; left:0; width:100%; height: 100%; border: 0;" id="electoral_map"></iframe>
     </div> -->
+    <div style=" width: 100%; max-width: 700px; margin: 0 auto;">
+    <iframe src="assets/chloroplethd3.html" title="Election Map" frameborder="0" id="electoral_map"
+        scrolling="no"></iframe>
+    </div>
 
-    <iframe src="assets/chloroplethd3.html" title="Election Map" frameborder="0" id="electoral_map" scrolling="no"></iframe>
-    
 
-
-    <table style="width: 60%; margin: 0 auto;min-width: min(600px, 95vw); max-width: 1000px; background-color: rgba(0,0,0,0);" >
+    <table
+        style="width: 60%; margin: 0 auto;min-width: min(600px, 95vw); max-width: 1000px; background-color: rgba(0,0,0,0);">
         <thead>
             <tr>
                 <th class="bottom-border">Electoral college</th>
