@@ -84,8 +84,8 @@ title: "index"
             style="position:absolute; top:0; left:0; width:100%; height: 100%; border: 0;" id="electoral_map"></iframe>
     </div> -->
     <div style=" width: 100%; max-width: 700px; margin: 0 auto;">
-    <iframe src="assets/chloroplethd3.html" title="Election Map" frameborder="0" id="electoral_map"
-        scrolling="no"></iframe>
+        <iframe src="assets/chloroplethd3.html" title="Election Map" frameborder="0" id="electoral_map"
+            scrolling="no"></iframe>
     </div>
 
 
@@ -220,6 +220,7 @@ title: "index"
         </div>
     </div>
 </section>
+
 <section class="section_container index_section" style="height:100em">
     <h2 class="text-center" style="margin:0 0">All the outcomes</h2>
     <p>95% of our simulations have Harris winning between {{
@@ -252,3 +253,35 @@ title: "index"
         <iframe src="assets/ev_vote.html" title="Election Polls" style="width:80%; height:40vh"></iframe>
     </div>
 </section>
+
+<!-- <section class="section_container">
+
+    <table id="state_table" style="border-spacing: 0;"  class="display dataTable cell-border" >
+        <thead>
+            <tr>
+                <th scope="col">State</th>
+                <th scope="col">Forecasted Voteshare</th>
+                <th scope="col">Predicted Margin </th>
+                <th scope="col">EV's</th>
+                <th scope="col">Tipping Point Chance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for thedata in site.data.state_outputs%}
+                <tr>
+                    <th scope="row">{{thedata["state"]}}</th>
+                    <td><object type="image/svg+xml" style="width:50%; height: 10%;" data={{ '/assets/table_plots/' | append: thedata["state"] | append: '.svg' | relative_url }}></object></td>
+                    <td>{% assign margin = thedata["Median Harris Margin"] | plus: 0 %}
+                        {% if margin > 0 %}
+                          D+{{ margin | times: 100 | round: 1}}
+                        {% else %}
+                          R+{{ margin | times: -100 | round: 0}}
+                        {% endif %}</td>
+                    <td>{{thedata["EV"] | round }}</td>
+                    <td>{{thedata["tipping_point_chance"] | times: 100 | round: 1}}%</td>
+                </tr>
+            {%endfor %}
+        </tbody>
+    </table>
+
+</section> -->

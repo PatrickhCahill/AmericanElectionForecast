@@ -1,5 +1,6 @@
 <!-- jQuery -->
-<script src={{"/js/jquery.js" | relative_url}}></script>
+<!-- <script src={{"/js/jquery.js" | relative_url}}></script> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 <!-- Bootstrap Core JavaScript -->
@@ -12,7 +13,9 @@
 
 <!-- Custom Theme JavaScript -->
 <script src={{"/js/creative.js" | relative_url}}></script>
-
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.min.css" />
+  
+<script src="https://cdn.datatables.net/2.1.5/js/dataTables.min.js"></script>
 
 {% assign js_file = "js/" | append: page.title | append: ".js" %}
 {% if js_file %}

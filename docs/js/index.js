@@ -79,5 +79,38 @@ $(document).ready(function () {
 
     // Adjust height when the window is resized
     $(window).on('resize', resize_electoral_map);
+    
 
+
+
+
+    // $.extend( $.fn.dataTable.ext.type.order, {
+    //     "my-custom-sort-asc": function ( val_1, val_2 ) {
+    //         console.log("called")
+    //       if (val_1 < val_2) {
+    //         return 1;
+    //       } else if (val_1 > val_2) {
+    //         return -1;
+    //       } else {
+    //         return 0;
+    //       }
+    //     },
+    
+    //     "my-custom-sort-desc": function ( val_1, val_2 ) {
+    //       if (val_1 < val_2) {
+    //         return -1;
+    //       } else if (val_1 > val_2) {
+    //         return 1;
+    //       } else {
+    //         return 0;
+    //       }
+    //     }
+    
+    //   } );
+
+    //   $('#state_table').DataTable({
+    //     columnDefs: [
+    //         { "type": "my-custom-sort", targets: "_all" }
+    //       ]
+    // });
 });
