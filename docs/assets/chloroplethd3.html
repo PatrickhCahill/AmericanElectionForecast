@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>US Map with Transparent Background and Labels</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Probabilities Of Each State - Map</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         #hoverbar {
@@ -323,7 +326,7 @@
                         const hoverwidth = 150
                         hoverbar.style('margin-left', Math.min((1 - harris_win_chance) * cartogram_wrapper_width, cartogram_wrapper_width - hoverwidth) + "px");
 
-                       probability_indicator
+                        probability_indicator
                             .style('margin-left', (1 - harris_win_chance) * (1 - 10 / cartogram_wrapper_width) * cartogram_wrapper_width + "px")
                             .style('display', 'flex');
                     } else { // This should be Maine or Nebraska's electoral districts
@@ -353,9 +356,9 @@
                         probability_indicator.style("display", "none");
                     });
 
-            }).catch(function(error) {
-    console.error("Error loading data:", error);
-});
+            }).catch(function (error) {
+                console.error("Error loading data:", error);
+            });
         });
     </script>
 

@@ -29,7 +29,7 @@ header_inner_override: ""
         <div class="text-center h3 strong">First - an analogy</div>
         <p class="text-left"> Suppose you are blindfolded and holding a bow and arrow. A pretty bad idea - I know. You shoot the arrow at a target. You hear the arrow thud into the target so you know you landed somewhere. But beyond that you know nothing. Fortunately, you have two friends: Alice and Bob. Alice tells you that you hit 8cm above the bullseye. Bob tells you that you hit 5cm above the bullseye.</p>
         <p class="text-left">Where did the bullet land?</p>
-        <div style="margin: 0 auto; max-width: 450px; width:100%;" ><object type="image/svg+xml" data={{"/assets/target_alice_bob.svg" | relative_url}}></object></div>
+        <div style="margin: 0 auto; max-width: 450px; width:100%;" ><object type="image/svg+xml" data={{"/assets/target_alice_bob.svg" | relative_url}} style="width:100%;"></object></div>
         <p class="text-left"> Maybe your first instinct is to pick the point in the middle. This amounts to giving both Alice and Bob's measurements <b>equal weight.</b></p>
         <p class="text-left">But maybe you know Bob is an experienced shooter. Or maybe Alice brought a tape measure and Bob didn't. Either way the point is that not all <b>measurements are create equal</b>. For every measurement, we need to know the <span style="text-decoration: underline;">uncertainty</span> in the measurement.</p>
         <p class="text-left">Building an election forecast model is pretty analogous to this situation. The forecaster is blind to the event. We can't see the future. We only have a limited amount of data availabe to us and the data are unreliable and full of uncertainty.</p>
@@ -60,7 +60,7 @@ header_inner_override: ""
                 <p class="text-faded">The same motivation lies behind why we don't include economic fundamentals. Those approaches are valid, but they require careful reasoning and a causal model of how different factors influence an individual voter. For example, you shouldn't just use a regression on the unemployment data and incumbent party performance without reasoning through the causal chain. Once you do, you quickly realise that to properly include unemployment data, one needs to conduct polling of their own to parameterise how unemployment changes effect different categories of voters.</p>
                 
                 <p>That's a difficult task. Better to keep it simple, stupid.</p>
-                <!-- <a href={{"/polling.html" | relative_url}} class="btn btn-default btn-xl">Polling.</a> -->
+                <!-- <a href={{"/polling.html" | relative_url}} class="btn btn-default btn-xl">Check out the polling to see the data we assimilate.</a> -->
             </div>
         </div>
     </div>
@@ -74,11 +74,11 @@ header_inner_override: ""
         <p class="text-left">Take Arizona: In every election has voted d% for the Democrat r% for the Republican and i% for everybody else. That compares to the national vote in each election which is D%, R% and I% respectively.</p>
         <p> So in every election we look at the difference between those values. d - D, r - R and i-I. You can think of these values as measuring is Arizona more or less Democratic than the rest of the country. Or more or less Republican. Or do they have a higher than expected third party vote.</p>
 
-        <div style="margin: 0 auto; height:40vh" ><iframe src={{"/assets/AZ_evolve_scatter.html" | relative_url}} height="100%"></iframe></div>
+        <div style="margin: 0 auto; height:40vh" ><iframe src={{"/assets/evolve_plots/AZ_evolve_scatter.html" | relative_url}} height="100%"></iframe></div>
         <p class="text-left"> We can observe that in Arizona, the state is becoming less Republican overtime (compare to the National vote), the other vote is roughly the same as the national vote, and it is becoming much more democratic.
         <p class="text-left">To estimate the result at 2024 we perform a linear regression (with the weights to each point given by the number of years from the 2024 election squared). That's probably a bunch of mumbo jumbo. Basically we draw a line through the data to explain the trends we observed.</p>
         <div style="margin: 0 auto; height:40vh" >
-            <iframe src={{"/assets/AZ_evolve.html" | relative_url}} height="85%"></iframe>
+            <iframe src={{"/assets/evolve_plots/AZ_evolve.html" | relative_url}} height="85%"></iframe>
             <div class="">
                 <p class="text-center"> Estimate and 95% Confidence Interval <img src={{"/assets/ci_key.svg" | relative_url}} alt="Description" style="height: 15%; vertical-align: middle;"></p>
             </div>
