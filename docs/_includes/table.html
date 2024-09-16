@@ -1,0 +1,315 @@
+<style>
+    .hr {
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        height: 1px;
+        background-color: black;
+    }
+
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+        position: relative;
+        padding: 10px;
+        font-family: sans-serif;
+    }
+
+
+    .sortable-table {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+
+    .table-header,
+    .table-row {
+        display: flex;
+        width: 100%;
+        padding: 0 0 0 0;
+        background-color: transparent;
+        /* border-bottom: 1px solid #ccc; */
+    }
+
+    .table-header {
+        color: #2a3340;
+        font-size: smaller;
+    }
+
+    .table-row:nth-child(odd) {
+        background-color: transparent;
+    }
+
+    .table-cell {
+        flex: 1;
+        text-align: center;
+        /* border: 1px solid black; */
+        margin: auto auto;
+    }
+
+    .table-cell small {
+        font-weight: normal;
+    }
+
+    .table-cell.state-cell {
+        font-weight: bold;
+        text-align: left;
+        flex: 1;
+        font-size: smaller;
+    }
+
+    .table-cell.chance-cell {
+        flex: 1;
+        text-align: left;
+    }
+
+    .table-cell.margin-cell {
+        flex: 3;
+    }
+
+
+    /* Sorting arrow styles */
+    .sort-arrow {
+        cursor: pointer;
+        margin-left: 5px;
+    }
+
+    .asc::after {
+        content: "▲";
+    }
+
+    .desc::after {
+        content: "▼";
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+        .table-cell {
+            padding: 5px;
+        }
+    }
+
+    .tick-mark-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .tick {
+        height: 324px;
+        background-color: #d8d8d8;
+        width: 0.1em;
+        position: relative;
+        overflow: auto;
+    }
+
+    .table-footnote {
+        padding-top: 10px;
+        font-size: x-small;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+
+
+<div class="table-container">
+
+    <div class="sortable-table">
+
+        <!-- Table header -->
+        <div class="table-header">
+            <div class="table-cell state-cell" data-sort="0" style="font-weight: normal; font-size: 10px;">STATE <span
+                    class="sort-arrow"></span></div>
+            <div class="table-cell chance-cell" data-sort="1" style="font-weight: normal; font-size: 10px;">HARRIS
+                CHANCE<span class="sort-arrow"></span></div>
+            <div class="table-cell margin-cell" data-sort="2" style="font-weight: normal; font-size: 10px;">PREDICTED
+                VOTESHARE<span class="sort-arrow"></span>
+            </div>
+            <div class="table-cell" data-sort="3" style="font-weight: normal; font-size: 10px;">HARRIS ADVANTAGE<span
+                    class="sort-arrow"></span></div>
+            <div class="table-cell" data-sort="4" style="font-weight: normal; font-size: 10px;">TRUMP ADVANTAGE<span
+                    class="sort-arrow"></span></div>
+            <div class="table-cell" data-sort="5" style="font-weight: normal; font-size: 10px;">TIPPING POINT
+                CHANCE<span class="sort-arrow"></span></div>
+        </div>
+        <div class="hr"></div>
+        <div class="tick-mark-wrapper">
+            <div style="flex: 1"></div>
+            <div style="flex: 1"></div>
+            <div style="display: flex; height: 30px; position: relative; flex:3;">
+                <div style="position: absolute; left: 0%; margin: auto;">
+                    <div class="" style="color:#1d232b; margin-left: -0.5em;">0%</div>
+                    <div class="tick"> </div>
+                </div>
+                <div style="position: absolute; left: 25%">
+                    <div class="" style="color:#1d232b; margin-left: -0.5em;">25%</div>
+
+                    <div class="tick"> </div>
+                </div>
+
+                <div style="position: absolute; left: 50%">
+                    <div class="" style="color:#1d232b; margin-left: -0.5em;">50%</div>
+
+                    <div class="tick"></div>
+                </div>
+                <div style="position: absolute; left: 75%">
+                    <div class="" style="color:#1d232b; margin-left: -0.5em;">75%</div>
+                    <div class="tick"> </div>
+                </div>
+                <div style="position: absolute; left: 100%">
+                    <div class="" style="color:#1d232b; margin-left: -0.9em;">100%</div>
+                    <div class="tick"> </div>
+                </div>
+            </div>
+            <div style="flex: 1"></div>
+            <div style="flex: 1"></div>
+            <div style="flex: 1"></div>
+
+        </div>
+
+
+
+        <!-- Table rows -->
+        <div class="rows">
+            
+            {% for state in site.data.state_outputs %}
+            
+            <div class="table-row">
+                <div class="table-cell state-cell">
+                    {{ state['state']}}
+                    <br>
+                    <small>{{state['EV']}} EV</small>
+                </div>
+                <div class="table-cell chance-cell">{{state['Probability Harris Win'] | times: 100 | round: 1}}%</div>
+                <div class="table-cell margin-cell" style="position: relative;"
+                    data-margin="{{ state['Median Harris Margin'] | times: state['Median Harris Margin'] | times: -1}}">
+                    <div
+                        style="left: {{state['Harris Lower CI'] | times: 100}}%; width:{{state['Harris CI Width'] | times: 100}}%; position: absolute; background-color: rgba(17, 109, 194, 0.5); top:-15px; height:8px;">
+                    </div>
+                    <div
+                        style="left: calc({{state['Harris Voteshare'] | times: 100}}% - 5px); border-radius: 50%; border: 1px solid; position: absolute; border-color: rgba(17, 109, 194, 1); top:-16px; width: 10px; height: 10px;">
+                    </div>
+
+                    <div
+                        style="left: {{state['Trump Lower CI'] | times: 100}}%; width:{{state['Trump CI Width'] | times: 100}}%; position: absolute; background-color: rgba(207, 19, 19, 0.5); top:-5px; height:8px;">
+                    </div>
+                    <div
+                        style="left: calc({{state['Trump Voteshare'] | times: 100}}% - 5px); border-radius: 50%; border: 1px solid; position: absolute; border-color: rgba(207, 19, 19, 1); top:-6px; width: 10px; height: 10px;">
+                    </div>
+
+                    <div
+                        style="left: {{state['Other Lower CI'] | times: 100}}%; width:{{state['Other CI Width'] | times: 100}}%; position: absolute; background-color: rgba(138, 138, 138,0.5); top:5px; height:8px;">
+                    </div>
+                    <div
+                        style="left: calc({{state['Other Voteshare'] | times: 100}}% - 5px); border-radius: 50%; border: 1px solid; position: absolute; border-color: rgba(138, 138, 138,1); top:4px; width: 10px; height: 10px;">
+                    </div>
+                </div>
+                <div class="table-cell">{{state['Harris Advantage'] |times: 100 | round: 1 }}%</div>
+                <div class="table-cell">{{state['Trump Advantage'] |times: 100 | round: 1 }}%</div>
+                <div class="table-cell">{{ state['tipping_point_chance'] |times: 100 | round: 1 }}%</div>
+            </div>
+            
+            {% endfor %}
+
+        </div>
+    </div>
+
+<div class="table-footnote">
+    The Harris advantage is the probability that Harris would win the electoral college if she won that given state.
+</div>
+<div style="display: flex; justify-content: center;"><button class="btn" id="toggle-button">Show More</button></div>
+</div>
+
+
+
+
+<!-- jQuery and sorting logic -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function sortTable(the_this) {
+    const sortIndex = $(the_this).data('sort'); // Get the column index to sort by
+    const rows = $('.table-row').toArray();
+    const isAsc = $(the_this).hasClass('asc'); // Check current sort direction
+
+    // Sort the rows based on the column
+    rows.sort((a, b) => {
+        let aVal, bVal;
+
+        // Handle special sorting for data-sort="2" (Predicted Voteshare based on data-margin)
+        if (sortIndex === 2) {
+            // Get data-margin attribute values
+            aVal = parseFloat($(a).find('.margin-cell').data('margin'));
+            bVal = parseFloat($(b).find('.margin-cell').data('margin'));
+        } else {
+            // Handle regular text or number sorting for other columns
+            aVal = $(a).children('.table-cell').eq(sortIndex).text().trim();
+            bVal = $(b).children('.table-cell').eq(sortIndex).text().trim();
+
+            // Handle percentages and numeric values
+            aVal = aVal.replace('%', '').replace('+', '').replace('-', '');
+            bVal = bVal.replace('%', '').replace('+', '').replace('-', '');
+
+            if (!isNaN(aVal)) aVal = parseFloat(aVal);
+            if (!isNaN(bVal)) bVal = parseFloat(bVal);
+        }
+
+        return (aVal > bVal ? 1 : -1) * (isAsc ? 1 : -1);
+    });
+
+    // Toggle sort direction classes
+    $('.table-header .table-cell').removeClass('asc desc');
+    $(the_this).toggleClass('asc', !isAsc);
+    $(the_this).toggleClass('desc', isAsc);
+
+    // Reorder the rows in the table
+    $('.rows').append(rows);
+    if ($('#toggle-button').text().toLowerCase() === 'show more') {
+        $('.table-row.hidden').removeClass('hidden');
+        $(".table-row").slice(10).addClass("hidden");
+
+    }
+}
+    function updateTicks() {
+        var bodyHeight = $('.rows').height();
+
+        // Set the height of each tick to the height of the body
+        $('.tick').css('height', bodyHeight);
+    }
+
+    $(document).ready(function () {
+        // Sorting logic
+        $('.table-header .table-cell').on('click', function () {
+            sortTable(this)
+        });
+
+
+        // Initially hide rows except the top 10
+        $(".table-row").slice(10).addClass("hidden");
+
+        // Show/Hide logic for "Show More" / "Show Less" button
+        $('#toggle-button').on('click', function () {
+            const isHidden = $('.table-row.hidden').length > 0;
+
+            if (isHidden) {
+                // Show more rows
+                $('.table-row.hidden').removeClass('hidden');
+                $('#toggle-button').text('Show Less').addClass('btn-selected');
+            } else {
+                // Show only the top 10 rows again
+                $(".table-row").slice(10).addClass("hidden");
+                $('#toggle-button').text('Show More').removeClass('btn-selected');
+            }
+            updateTicks()
+        });
+
+
+
+        updateTicks()
+        sortTable($('div[data-sort="2"]'))
+
+    });
+
+</script>

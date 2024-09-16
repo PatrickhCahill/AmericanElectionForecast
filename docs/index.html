@@ -177,6 +177,14 @@ title: "index"
 <hr />
 
 <section class="section_container">
+    <h2 class="text-center" style="margin:0 0">The important races</h2>
+    <p>The table below breaks down each of the elections further. The tipping point chance is the chance that this state is the closest state in a winner coalition. The perennial swing state of Pennsylvania has had the highest tipping chance. Whoever wins Pennsylvania with have a major advatnage in teh rest of the electoral college.</p>
+    {% include table.html %}
+</section>
+
+<hr />
+
+<section class="section_container">
     <h2 class="text-center" style="margin:0 0">The system v. the People</h2>
     <p class="text-center">The people's vote does not directly determine the winner of the presidential election. The
         winner is the person who wins the vote in a subset of states whose electoral votes sum to 270. In 2016, Hillary
@@ -248,34 +256,3 @@ title: "index"
     </div>
 </section>
 
-<!-- <section class="section_container">
-
-    <table id="state_table" style="border-spacing: 0;"  class="display dataTable cell-border" >
-        <thead>
-            <tr>
-                <th scope="col">State</th>
-                <th scope="col">Forecasted Voteshare</th>
-                <th scope="col">Predicted Margin </th>
-                <th scope="col">EV's</th>
-                <th scope="col">Tipping Point Chance</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for thedata in site.data.state_outputs%}
-                <tr>
-                    <th scope="row">{{thedata["state"]}}</th>
-                    <td><object type="image/svg+xml" style="width:50%; height: 10%;" data={{ '/assets/table_plots/' | append: thedata["state"] | append: '.svg' | relative_url }}></object></td>
-                    <td>{% assign margin = thedata["Median Harris Margin"] | plus: 0 %}
-                        {% if margin > 0 %}
-                          D+{{ margin | times: 100 | round: 1}}
-                        {% else %}
-                          R+{{ margin | times: -100 | round: 0}}
-                        {% endif %}</td>
-                    <td>{{thedata["EV"] | round }}</td>
-                    <td>{{thedata["tipping_point_chance"] | times: 100 | round: 1}}%</td>
-                </tr>
-            {%endfor %}
-        </tbody>
-    </table>
-
-</section> -->
