@@ -16,3 +16,6 @@ collections:
   polls:
     output: true
     permalink: /:collection/:path/
+
+plugins:
+  -  jekyll-seo-tag
