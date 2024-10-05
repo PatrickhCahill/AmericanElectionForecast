@@ -1,4 +1,6 @@
 #!/bin/bash
+source $HOME/.bashrc
+
 cd `dirname $0`
 
 jupyter execute src/polling_vals.ipynb 
