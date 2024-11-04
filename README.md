@@ -8,4 +8,4 @@ A simple electoral forecaster. A brief methedological overview:
 5. We then have means for each of the candidates and associated variances which enables us to calculate probabilities and voteshare.
 6. Finally, we run a brief simulation to draw a histogram.
 
-Feel free to use this code however you like. I sourced the data [MIT Election Data and Science Lab](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PEJ5QU). Plots were made using [plotly.py](https://plotly.com/python/)
+Feel free to use this code however you like. I sourced the data [MIT Election Data and Science Lab](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PEJ5QU). Plots were made using [plotly.py](https://plotly.com/python/) and hand-coded [d3](https://d3js.org/) inspired by the 538 plots.
